@@ -1,0 +1,4 @@
+FROM registry.redhat.io/rh-sso-7-tech-preview/sso74-init-container-rhel8:7.4
+
+# Add theme
+COPY themes/myfurbaby/ /opt/eap/themes/myfurbaby/
