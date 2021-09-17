@@ -1,0 +1,17 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rh-sso-postgresql
+  namespace: rh-sso-demo
+  labels:
+    app: rh-sso
+spec:
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  selector:
+    app: rh-sso
+    component: database
+  type: ClusterIP

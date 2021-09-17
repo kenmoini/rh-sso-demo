@@ -1,0 +1,84 @@
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: rh-sso-postgresql
+  namespace: rh-sso-demo
+  labels:
+    app: rh-sso
+    component: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rh-sso
+      component: database
+  template:
+    metadata:
+      name: rh-sso-postgresql
+      namespace: rh-sso-demo
+      creationTimestamp: null
+      labels:
+        app: rh-sso
+        component: database
+    spec:
+      volumes:
+        - name: rh-sso-postgresql-claim
+          persistentVolumeClaim:
+            claimName: rh-sso-postgresql-claim
+      containers:
+        - resources: {}
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - '-c'
+                - >-
+                  psql -h 127.0.0.1 -U $POSTGRESQL_USER -q -d
+                  $POSTGRESQL_DATABASE -c 'SELECT 1'
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          name: rh-sso-postgresql
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          env:
+            - name: POSTGRESQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rh-sso-db-secret
+                  key: POSTGRES_USERNAME
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rh-sso-db-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRESQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: rh-sso-db-secret
+                  key: POSTGRES_DATABASE
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: rh-sso-postgresql-claim
+              mountPath: /var/lib/pgsql/data
+          terminationMessagePolicy: File
+          image: 'registry.redhat.io/rhel8/postgresql-10:1'
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

@@ -1,0 +1,21 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    description: The web server's https port.
+    service.beta.openshift.io/serving-cert-secret-name: rh-sso-x509-https-secret
+  labels:
+    app: rh-sso
+  name: rh-sso
+  namespace: rh-sso-demo
+spec:
+  ports:
+    - name: rh-sso
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+  selector:
+    app: rh-sso
+    component: rh-sso
+  type: ClusterIP

@@ -1,0 +1,19 @@
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: rh-sso-metrics-rewrite
+  namespace: rh-sso-demo
+  labels:
+    app: rh-sso
+spec:
+  path: /auth/realms/master/metrics
+  to:
+    kind: Service
+    name: rh-sso
+    weight: 100
+  port:
+    targetPort: rh-sso
+  tls:
+    termination: reencrypt
+  wildcardPolicy: None

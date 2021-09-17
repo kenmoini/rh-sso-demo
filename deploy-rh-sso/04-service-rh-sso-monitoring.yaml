@@ -1,0 +1,20 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    description: The monitoring service for Prometheus
+  name: rh-sso-monitoring
+  namespace: rh-sso-demo
+  labels:
+    app: rh-sso
+spec:
+  ports:
+    - name: rh-sso-monitoring
+      protocol: TCP
+      port: 9990
+      targetPort: 9990
+  selector:
+    app: rh-sso
+    component: rh-sso
+  type: ClusterIP

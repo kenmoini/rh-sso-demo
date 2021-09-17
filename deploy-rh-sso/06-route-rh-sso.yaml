@@ -1,0 +1,18 @@
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: rh-sso
+  namespace: rh-sso-demo
+  labels:
+    app: rh-sso
+spec:
+  to:
+    kind: Service
+    name: rh-sso
+    weight: 100
+  port:
+    targetPort: rh-sso
+  tls:
+    termination: reencrypt
+  wildcardPolicy: None
