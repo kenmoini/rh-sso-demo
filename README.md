@@ -1,10 +1,17 @@
 # Red Hat Single Sign On Demo
 
-This repo house a number of quickstarts, apps, and services to showcase the capabilities of Red Hat Single Sign On, based on Keycloak.
+This repo houses a number of quickstarts, apps, and services to showcase the capabilities of Red Hat Single Sign On, based on Keycloak.
+
+Things covered:
+
+- Deploying RH SSO to OpenShift.
+- Creating a Realm, configuring it, testing with a basic Client.
+- Modifying the deployment to use custom themes with a custom baked image.
+- Deploying a number of services to use as Clients.
 
 ## Deployment
 
-The deployment target for this demo is Red Hat OpenShift (tested on 4.8) - you could run this on other Kubernetes clusters as well.
+The deployment target for this demo is Red Hat OpenShift (tested on 4.8) - you could run this on other Kubernetes clusters as well with little modification.
 
 ## Documentation
 
