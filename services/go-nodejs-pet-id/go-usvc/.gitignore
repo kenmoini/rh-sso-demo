@@ -1,0 +1,5 @@
+/dist/*
+!/dist/README.md
+main
+config.yml
+config.yaml

@@ -1,0 +1,21 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    description: The PetID Vue SPA web server's http port.
+  labels:
+    app: pet-id
+    app.kubernetes.io/part-of: pet-id
+    component: service
+  name: pet-id-vue
+spec:
+  ports:
+    - name: pet-id-vue
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: pet-id-vue
+    component: pet-id-vue
+  type: ClusterIP

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pet-id-vue
+  labels:
+    app: pet-id
+    app.kubernetes.io/part-of: pet-id
+    component: deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pet-id-vue
+  template:
+    metadata:
+      labels:
+        app: pet-id-vue
+    spec:
+      containers:
+      - name: pet-id-vue
+        image: quay.io/kenmoini/pet-id-vue-frontend:latest
+        ports:
+        - containerPort: 8080
+          name: pet-id-vue
+        env:
+          - name: KEYCLOAK_SERVER
+            value: http://rh-sso:8080/auth
+          - name: KEYCLOAK_REALM
+            value: someRealm
+          - name: KEYCLOAK_CLIENT_ID
+            value: someClientID

@@ -1,0 +1,13 @@
+FROM registry.access.redhat.com/ubi8/nodejs-10:latest as builder
+
+USER root
+
+COPY . .
+
+RUN npm install \
+ && npm run build
+
+FROM registry.access.redhat.com/ubi8/httpd-24:latest
+
+COPY --from=builder /opt/app-root/src/dist/ /var/www/html/dist/
+COPY --from=builder /opt/app-root/src/index.html /var/www/html/index.html

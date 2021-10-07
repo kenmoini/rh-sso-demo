@@ -1,0 +1,1 @@
+This folder holds the distributed binaries of this service and should remain empty
