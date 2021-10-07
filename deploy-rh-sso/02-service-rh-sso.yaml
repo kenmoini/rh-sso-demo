@@ -7,6 +7,8 @@ metadata:
     service.beta.openshift.io/serving-cert-secret-name: rh-sso-x509-https-secret
   labels:
     app: rh-sso
+    app.kubernetes.io/part-of: rh-sso
+    component: service
   name: rh-sso
   namespace: rh-sso-demo
 spec:

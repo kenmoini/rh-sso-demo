@@ -6,6 +6,8 @@ metadata:
   namespace: rh-sso-demo
   labels:
     app: rh-sso
+    app.kubernetes.io/part-of: rh-sso
+    component: configmap
 data:
   liveness_probe.sh: |
     #!/bin/bash

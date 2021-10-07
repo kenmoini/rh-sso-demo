@@ -8,6 +8,8 @@ metadata:
   namespace: rh-sso-demo
   labels:
     app: rh-sso
+    app.kubernetes.io/part-of: rh-sso
+    component: service
 spec:
   ports:
     - name: rh-sso-monitoring
