@@ -47,6 +47,6 @@ jobs:
       with:
         context: ./services/go-nodejs-pet-id/app-vue
         push: true
-        file: Containerfile
+        file: ./services/go-nodejs-pet-id/app-vue/Containerfile
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
