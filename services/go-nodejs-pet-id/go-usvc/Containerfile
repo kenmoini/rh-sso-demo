@@ -1,0 +1,23 @@
+# Build the manager binary
+FROM quay.io/polyglotsystems/golang-ubi:latest as builder
+
+WORKDIR /workspace
+
+COPY . .
+
+RUN go mod download
+
+# Build
+RUN make build
+
+# Use distroless as minimal base image to package the manager binary
+# Refer to https://github.com/GoogleContainerTools/distroless for more details
+FROM registry.access.redhat.com/ubi8/ubi-minimal:8.3
+
+WORKDIR /
+
+COPY --from=builder /workspace/dist/pet-id .
+
+USER 65532:65532
+
+ENTRYPOINT ["/pet-id"]
