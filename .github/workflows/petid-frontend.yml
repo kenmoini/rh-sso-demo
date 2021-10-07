@@ -2,6 +2,7 @@ name: PetID - Frontend Build
 on:
   push:
     paths:
+      /.github/workflows/
       /services/go-nodejs-pet-id/app-vue/
     branches:
       - main
