@@ -45,7 +45,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        context: /services/go-nodejs-pet-id/app-vue
+        context: ./services/go-nodejs-pet-id/app-vue
         push: true
         file: Containerfile
         tags: ${{ steps.meta.outputs.tags }}
