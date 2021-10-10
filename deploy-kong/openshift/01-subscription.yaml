@@ -1,0 +1,12 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: kong-offline-operator
+  namespace: openshift-operators
+spec:
+  channel: alpha
+  installPlanApproval: Automatic
+  name: kong-offline-operator
+  source: certified-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: kong.v0.3.0
