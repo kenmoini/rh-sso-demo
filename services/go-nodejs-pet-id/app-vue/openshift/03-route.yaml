@@ -2,7 +2,7 @@
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: pet-id-vue
+  name: pet-id-frontend
   labels:
     app: pet-id
     app.kubernetes.io/part-of: pet-id
@@ -10,10 +10,10 @@ metadata:
 spec:
   to:
     kind: Service
-    name: pet-id-vue
+    name: pet-id-frontend
     weight: 100
   port:
-    targetPort: pet-id-vue
+    targetPort: pet-id-frontend
   tls:
     termination: reencrypt
   wildcardPolicy: None

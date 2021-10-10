@@ -15,3 +15,6 @@ app:
     username: petiddbu
     password: securePassword
     database: petid
+
+  config:
+    three_scale_header_secret: someSecret_value_for_a_shared_secret

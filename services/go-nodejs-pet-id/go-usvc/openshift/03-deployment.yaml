@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pet-id-frontend
+  name: pet-id-backend
   labels:
     app: pet-id
     app.kubernetes.io/part-of: pet-id
@@ -10,18 +10,18 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: pet-id-frontend
+      app: pet-id-backend
   template:
     metadata:
       labels:
-        app: pet-id-frontend
+        app: pet-id-backend
     spec:
       containers:
-      - name: pet-id-frontend
-        image: quay.io/kenmoini/pet-id-frontend:latest
+      - name: pet-id-backend
+        image: quay.io/kenmoini/pet-id-backend:latest
         ports:
         - containerPort: 8080
-          name: pet-id-frontend
+          name: pet-id-backend
         env:
           - name: KEYCLOAK_SERVER
             value: http://rh-sso:8080/auth
@@ -29,3 +29,5 @@ spec:
             value: someRealm
           - name: KEYCLOAK_CLIENT_ID
             value: someClientID
+          - name: THREE_SCALE_SECRET_HEADER
+            value: someSecretHeaderKeyValue

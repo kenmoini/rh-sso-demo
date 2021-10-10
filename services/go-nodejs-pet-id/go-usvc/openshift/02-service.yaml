@@ -8,14 +8,14 @@ metadata:
     app: pet-id
     app.kubernetes.io/part-of: pet-id
     component: service
-  name: pet-id-frontend
+  name: pet-id-vue
 spec:
   ports:
-    - name: pet-id-frontend
+    - name: pet-id-vue
       protocol: TCP
       port: 8080
       targetPort: 8080
   selector:
-    app: pet-id-frontend
-    component: pet-id-frontend
+    app: pet-id-vue
+    component: pet-id-vue
   type: ClusterIP
