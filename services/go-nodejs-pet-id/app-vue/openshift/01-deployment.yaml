@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/part-of: pet-id
     component: deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: pet-id-frontend
@@ -26,6 +26,6 @@ spec:
           - name: KEYCLOAK_SERVER
             value: http://rh-sso:8080/auth
           - name: KEYCLOAK_REALM
-            value: someRealm
+            value: acme-inc
           - name: KEYCLOAK_CLIENT_ID
-            value: someClientID
+            value: pet-id-frontend

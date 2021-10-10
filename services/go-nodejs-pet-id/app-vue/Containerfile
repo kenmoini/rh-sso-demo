@@ -11,3 +11,4 @@ FROM registry.access.redhat.com/ubi8/httpd-24:latest
 
 COPY --from=builder /opt/app-root/src/dist/ /var/www/html/dist/
 COPY --from=builder /opt/app-root/src/index.html /var/www/html/index.html
+COPY silent-sso-check.html /var/www/html/silent-sso-check.html

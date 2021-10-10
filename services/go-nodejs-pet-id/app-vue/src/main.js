@@ -14,6 +14,13 @@ let initOptions = {
   url: KeycloakServer, realm: KeycloakRealm, clientId: KeycloakClientID, onLoad: 'login-required'
 }
 
+/*
+let initOptions = {
+  url: KeycloakServer, realm: KeycloakRealm, clientId: KeycloakClientID, onLoad: 'login-required',
+  silentCheckSsoRedirectUri: window.location.origin + '/silent-sso-check.html'
+}
+*/
+
 let keycloak = Keycloak(initOptions);
 
 keycloak.init({ onLoad: initOptions.onLoad }).then((auth) => {
