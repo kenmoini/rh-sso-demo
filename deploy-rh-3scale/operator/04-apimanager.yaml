@@ -1,0 +1,7 @@
+apiVersion: apps.3scale.net/v1alpha1
+kind: APIManager
+metadata:
+  name: demo-apimanager
+  namespace: rh-3scale-demo
+spec:
+  wildcardDomain: apps.core-ocp.kemo.labs

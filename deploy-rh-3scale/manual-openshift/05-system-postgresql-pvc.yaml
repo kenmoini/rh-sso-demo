@@ -1,0 +1,15 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: rh-3scale-postgresql-claim
+  labels:
+    app: db-services
+    app.kubernetes.io/part-of: db-services
+    component: pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

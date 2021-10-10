@@ -1,0 +1,11 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: openshift-serverless
+  labels:
+    kubernetes.io/metadata.name: openshift-serverless
+  annotations:
+    openshift.io/description: "OpenShift Serverless with Knative"
+    openshift.io/display-name: "OpenShift Serverless"
+spec: {}

@@ -1,0 +1,8 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: knative-serving
+  labels:
+    kubernetes.io/metadata.name: knative-serving
+spec: {}

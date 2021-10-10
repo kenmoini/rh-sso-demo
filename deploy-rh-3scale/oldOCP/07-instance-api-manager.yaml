@@ -1,0 +1,9 @@
+apiVersion: apps.3scale.net/v1alpha1
+kind: APIManager
+metadata:
+  name: demo-apimanager
+spec:
+  wildcardDomain: rh-3scale-demo.apps.core-ocp.kemo.labs
+  highAvailability:
+    enabled: true
+    externalZyncDatabaseEnabled: true

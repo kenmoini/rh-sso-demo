@@ -1,0 +1,18 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rh-3scale-postgresql
+  labels:
+    app: db-services
+    app.kubernetes.io/part-of: db-services
+    component: service
+spec:
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  selector:
+    app: rh-3scale-postgresql
+    component: database
+  type: ClusterIP
