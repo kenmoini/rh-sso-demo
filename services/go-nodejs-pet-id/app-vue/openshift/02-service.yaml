@@ -5,17 +5,16 @@ metadata:
   annotations:
     description: The PetID Vue SPA web server's http port.
   labels:
-    app: pet-id
-    app.kubernetes.io/part-of: pet-id
-    component: service
+    app: pet-id-frontend
+    app.kubernetes.io/part-of: pet-id-frontend
+    component: pet-id-frontend-service
   name: pet-id-frontend
 spec:
   ports:
     - name: pet-id-frontend
       protocol: TCP
       port: 8080
-      targetPort: 8080
+      targetPort: pet-id-frontend
   selector:
     app: pet-id-frontend
-    component: pet-id-frontend
   type: ClusterIP

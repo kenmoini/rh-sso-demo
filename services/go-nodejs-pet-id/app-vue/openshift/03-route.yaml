@@ -4,9 +4,9 @@ apiVersion: route.openshift.io/v1
 metadata:
   name: pet-id-frontend
   labels:
-    app: pet-id
-    app.kubernetes.io/part-of: pet-id
-    component: route
+    app: pet-id-frontend
+    app.kubernetes.io/part-of: pet-id-frontend
+    component: pet-id-frontend-route
 spec:
   to:
     kind: Service

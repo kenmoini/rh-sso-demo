@@ -3,18 +3,20 @@ kind: Deployment
 metadata:
   name: pet-id-frontend
   labels:
-    app: pet-id
-    app.kubernetes.io/part-of: pet-id
-    component: deployment
+    app: pet-id-frontend
+    app.kubernetes.io/part-of: pet-id-frontend
+    component: pet-id-frontend-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: pet-id-frontend
+      component: pet-id-frontend-deployment
   template:
     metadata:
       labels:
-        app: pet-id-frontend
+        app: pet-id-frontend  
+        component: pet-id-frontend-deployment
     spec:
       containers:
       - name: pet-id-frontend
@@ -22,6 +24,7 @@ spec:
         ports:
         - containerPort: 8080
           name: pet-id-frontend
+          protocol: TCP
         env:
           - name: KEYCLOAK_SERVER
             value: http://rh-sso:8080/auth

@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/nodejs-10:latest as builder
+FROM quay.io/polyglotsystems/ubi8-nginx:latest as builder
 
 USER root
 
