@@ -1,0 +1,1 @@
+# Furever Safe - Monolithic PHP Application for Fake Pet Insurance
