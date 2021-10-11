@@ -1,0 +1,32 @@
+api_version: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  name: pet-cluster
+spec:
+  kafka:
+    config:
+      offsets.topic.replication.factor: 3
+      transaction.state.log.replication.factor: 3
+      transaction.state.log.min.isr: 2
+      log.message.format.version: '2.7'
+      inter.broker.protocol.version: '2.7'
+    version: 2.7.0
+    storage:
+      type: ephemeral
+    replicas: 3
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
+  zookeeper:
+    storage:
+      type: ephemeral
+    replicas: 3

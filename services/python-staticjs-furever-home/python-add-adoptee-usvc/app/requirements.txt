@@ -1,0 +1,3 @@
+python-decouple
+requests==2.24.*
+kafka-python

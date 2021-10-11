@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: furever-home-add-adoptee-usvc
+  labels:
+    app: furever-home-add-adoptee-usvc
+    app.kubernetes.io/name: furever-home-add-adoptee-usvc
+    app.kubernetes.io/part-of: furever-home-add-adoptee-usvc
+    component: deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: furever-home-add-adoptee-usvc
+  template:
+    metadata:
+      labels:
+        app: furever-home-add-adoptee-usvc
+    spec:
+      containers:
+      - name: furever-home-add-adoptee-usvc
+        image: quay.io/kenmoini/furever-home-add-adoptee-usvc:latest
+        env:
+          - name: CYCLE_SECONDS
+            value: 30
+          - name: KAFKA_CLUSTER_ENDPOINT
+            value: 'pet-cluster-kafka-bootstrap:9092'
+          - name: KAFKA_TOPIC
+            value: new-adoptees

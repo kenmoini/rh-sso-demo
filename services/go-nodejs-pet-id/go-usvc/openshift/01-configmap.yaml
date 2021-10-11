@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: jig-env
-  namespace: jig-workshop-worker
+  name: pet-id-backend-env
   labels:
-    app: jig-workshop-worker
-    app.kubernetes.io/name: jig-workshop-worker
-    app.kubernetes.io/part-of: jig-workshop-worker
+    app: pet-id-backend
+    app.kubernetes.io/name: pet-id-backend
+    app.kubernetes.io/part-of: pet-id-backend
+    component: configmap
 data:
   .env: |
     app:

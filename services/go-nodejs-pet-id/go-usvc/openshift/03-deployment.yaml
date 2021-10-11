@@ -3,11 +3,12 @@ kind: Deployment
 metadata:
   name: pet-id-backend
   labels:
-    app: pet-id
-    app.kubernetes.io/part-of: pet-id
+    app: pet-id-backend
+    app.kubernetes.io/name: pet-id-backend
+    app.kubernetes.io/part-of: pet-id-backend
     component: deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: pet-id-backend
