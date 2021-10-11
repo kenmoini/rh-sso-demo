@@ -47,7 +47,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        context: ./services/python-staticjs-furever-home/python-add-adoptee-usvc/app
+        context: ./services/python-staticjs-furever-home/python-add-adoptee-usvc
         push: true
         file: ./services/python-staticjs-furever-home/python-add-adoptee-usvc/Containerfile
         tags: ${{ steps.meta.outputs.tags }}
