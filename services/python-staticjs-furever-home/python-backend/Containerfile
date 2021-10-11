@@ -1,0 +1,9 @@
+FROM registry.access.redhat.com/ubi8/python-36
+
+WORKDIR "/opt/app-root/src"
+
+COPY ./app .
+
+RUN pip3 install -r requirements.txt
+
+CMD "python3 /opt/app-root/src/app.py"
