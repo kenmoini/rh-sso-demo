@@ -1,4 +1,4 @@
-name: Furever Save - Build
+name: Furever Safe - Build
 on:
   push:
     branches:
