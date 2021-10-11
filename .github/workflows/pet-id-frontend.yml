@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'services/go-nodejs-pet-id/app-vue'
 jobs:
   # Build the container
   build-container:

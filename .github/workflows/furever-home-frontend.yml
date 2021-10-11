@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'services/python-staticjd-furever-home/static-frontend'
 jobs:
   # Build the container
   build-container:
