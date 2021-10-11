@@ -1,10 +1,10 @@
-name: Furever Home - Add Adoptee uSVC Build
+name: Furever Home - Backend Build
 on:
   push:
     branches:
       - main
     paths:
-      - 'services/python-staticjd-furever-home/python-add-adoptee-usvc'
+      - 'services/python-staticjd-furever-home/python-backend'
 jobs:
   # Build the container
   build-container:
@@ -28,7 +28,7 @@ jobs:
       with:
         # list of Docker images to use as base name for tags
         images: |
-          quay.io/kenmoini/furever-home-add-adoptee-usvc
+          quay.io/kenmoini/furever-home-backend
         # generate Docker tags based on the following events/attributes
         tags: |
           type=ref,event=branch
@@ -49,8 +49,8 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        context: ./services/python-staticjs-furever-home/python-add-adoptee-usvc
+        context: ./services/python-staticjs-furever-home/python-backend
         push: true
-        file: ./services/python-staticjs-furever-home/python-add-adoptee-usvc/Containerfile
+        file: ./services/python-staticjs-furever-home/python-backend/Containerfile
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
