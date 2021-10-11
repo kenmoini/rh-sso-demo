@@ -1,0 +1,32 @@
+FROM quay.io/polyglotsystems/ubi8-php-builder:latest as BUILDER
+
+USER root
+
+COPY ./furever-safe-app/ /var/www/html/
+
+WORKDIR "/var/www/html/"
+
+RUN composer dump-autoload \
+ && php artisan clear-compiled \
+ && php artisan cache:clear \
+ && php artisan event:clear \
+ && php artisan optimize:clear \
+ && composer install
+
+RUN mkdir -p /var/lib/php/{session,wsdlcache,opcache} \
+ && chmod 777 /var/lib/php/{session,wsdlcache,opcache} \
+ && chown 1001:1001 /var/lib/php/{session,wsdlcache,opcache}
+
+USER 1001
+
+FROM quay.io/polyglotsystems/ubi8-php:latest
+
+COPY container-root/ /
+
+COPY --from=BUILDER /var/www/html/ /var/www/html/
+
+USER root
+
+RUN chmod -R 777 /var/www/html
+
+USER 1001
