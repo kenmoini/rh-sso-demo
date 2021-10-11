@@ -6,12 +6,12 @@ COPY ./furever-safe-app/ /var/www/html/
 
 WORKDIR "/var/www/html/"
 
-RUN composer dump-autoload \
+RUN composer install \
+ && composer dump-autoload \
  && php artisan clear-compiled \
  && php artisan cache:clear \
  && php artisan event:clear \
- && php artisan optimize:clear \
- && composer install
+ && php artisan optimize:clear
 
 RUN mkdir -p /var/lib/php/{session,wsdlcache,opcache} \
  && chmod 777 /var/lib/php/{session,wsdlcache,opcache} \
