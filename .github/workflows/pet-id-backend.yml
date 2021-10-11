@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'services/go-nodejs-pet-id/go-usvc'
+      - 'services/go-nodejs-pet-id/go-usvc/**'
 jobs:
   # Build the container
   build-container:

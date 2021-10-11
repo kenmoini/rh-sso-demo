@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'services/python-staticjs-furever-home/python-add-adoptee-usvc'
+      - 'services/python-staticjs-furever-home/python-add-adoptee-usvc/**'
 jobs:
   # Build the container
   build-container:
