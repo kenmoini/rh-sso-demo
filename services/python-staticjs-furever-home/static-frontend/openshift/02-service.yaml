@@ -1,0 +1,19 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: furever-home-frontend
+    app.kubernetes.io/name: furever-home-frontend
+    app.kubernetes.io/part-of: furever-home-frontend
+    component: service
+  name: furever-home-frontend
+spec:
+  ports:
+    - name: furever-home-frontend
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: furever-home-frontend
+  type: ClusterIP

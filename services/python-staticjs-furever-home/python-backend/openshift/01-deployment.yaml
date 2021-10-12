@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: furever-home-backend
+  labels:
+    app: furever-home-backend
+    app.kubernetes.io/name: furever-home-backend
+    app.kubernetes.io/part-of: furever-home-backend
+    component: deployment
+  annotations:
+    app.openshift.io/connects-to: >-
+      [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"petadoption-db"}]
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: furever-home-backend
+  template:
+    metadata:
+      labels:
+        app: furever-home-backend
+    spec:
+      containers:
+      - name: furever-home-backend
+        image: quay.io/kenmoini/furever-home-backend:latest
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+        env:
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                key: database-user
+                name: petadoption-db
+          - name: DB_PASS
+            valueFrom:
+              secretKeyRef:
+                key: database-password
+                name: petadoption-db
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                key: database-name
+                name: petadoption-db
+          - name: DB_DB
+            valueFrom:
+              secretKeyRef:
+                key: database-name
+                name: petadoption-db

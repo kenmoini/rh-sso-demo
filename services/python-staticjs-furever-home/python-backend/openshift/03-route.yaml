@@ -1,0 +1,20 @@
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: furever-home-backend
+  labels:
+    app: furever-home-backend
+    app.kubernetes.io/name: furever-home-backend
+    app.kubernetes.io/part-of: furever-home-backend
+    component: route
+spec:
+  to:
+    kind: Service
+    name: furever-home-backend
+    weight: 100
+  port:
+    targetPort: furever-home-backend
+  tls:
+    termination: reencrypt
+  wildcardPolicy: None

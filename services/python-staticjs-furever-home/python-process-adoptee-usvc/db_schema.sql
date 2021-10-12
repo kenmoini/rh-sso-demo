@@ -14,3 +14,13 @@ CREATE TABLE `pet_adoptees` (
   `adopted_by` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `adoption_submissions` (
+  `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` text NOT NULL,
+  `pet_adoptee_id` int(9) unsigned NOT NULL,
+  `status` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp DEFAULT NULL
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
