@@ -11,6 +11,7 @@ data:
   overrides.js: |
     var API_ENDPOINT = "https://furever-home-backend-purrina-apps.apps.core-ocp.kemo.labs";
     var JUDGE_ENDPOINT = "https://furever-home-adoption-judge-usvc-purrina-apps.apps.core-ocp.kemo.labs";
+    var USER_ID = 1;
   functions.js: |
     console.log('hello from the functions file!');
   keycloak-shared.js: |
@@ -21,8 +22,13 @@ data:
         clientId: ''
       });
       keycloak.init().then(function(authenticated) {
-          alert(authenticated ? 'authenticated' : 'not authenticated');
+        if (authenticated) {
+          username = keycloak.subject;
+          token = keycloak.token;
+          jQuery(".text-username").text(username);
+        }
+        alert(authenticated ? 'authenticated' : 'not authenticated');
       }).catch(function() {
-          alert('failed to initialize');
+        alert('failed to initialize');
       });
     }

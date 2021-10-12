@@ -14,6 +14,7 @@
           <a href="/" class="d-inline-block align-items-center text-dark text-decoration-none">
             <span>Furever Home</span>
           </a>
+          <a href="#" class="float-right">Hello, <span class="text-username">UNDEFINED</span></a>
         </h1>
       </header>
 
@@ -191,7 +192,7 @@
           success: function (data, status, xhr) {
             jQuery('#exampleModal').modal('hide');
             jQuery('#exampleModalSuccess').modal('show');
-            jQuery(petID).parent().remove();
+            jQuery("#"+petID).parent().remove();
           },
           error: function (data, status, xhr) {
             jQuery('#exampleModal').modal('hide');
