@@ -120,12 +120,24 @@
     </div>
   </div>
 
-    <script src="assets/js/dist/starter.js"></script>
-
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript">
+    API_ENDPOINT = 'https://furever-home-backend-purrina-apps.apps.core-ocp.kemo.labs'
+  </script>
+  <script type="text/javascript" src="assets/js/container/overrides.js"></script>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="assets/js/dist/starter.js"></script>
+  <script type="text/javascript" src="assets/js/container/functions.js"></script>
 
     <script type="text/javascript">
+      jQuery(document).ready(function(e) {
+        jQuery.ajax(API_ENDPOINT + '/pets', {
+          success: function (data, status, xhr) {
+            console.log(data);
+          }
+        });
+      });
+
       jQuery(document).on('click', '.card', function(e) {
         e.preventDefault();
         petName = jQuery(this).find('img.card-img-top').attr('alt');
@@ -137,10 +149,11 @@
         petID = jQuery(this).attr('id');
         personID = "something";
         // Submit to microservice
-        // if successful
-        jQuery('#exampleModal').modal('hide');
-        // if successful
-        jQuery('#exampleModalSuccess').modal('show');
+        jQuery.ajax(API_ENDPOINT + '/pets', {
+          success: function (data, status, xhr) {
+            jQuery('p').append(data);
+          }
+        });
         // if unsuccessful
         jQuery('#exampleModalFailed').modal('show');
       });

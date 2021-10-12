@@ -1,0 +1,17 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: furever-home-backend
+  labels:
+    app: furever-home-backend
+spec:
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Containerfile
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/kenmoini/rh-sso-demo'
+      ref: main
+    contextDir: /services/python-staticjs-furever-home/python-backend/

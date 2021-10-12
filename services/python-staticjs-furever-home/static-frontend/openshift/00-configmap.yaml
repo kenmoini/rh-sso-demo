@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: furever-home-frontend-js-overrides
+  labels:
+    app: furever-home-frontend
+    app.kubernetes.io/name: furever-home-frontend
+    app.kubernetes.io/part-of: furever-home-frontend
+    component: configmap
+data:
+  override.js: |
+    API_ENDPOINT=https://furever-home-backend-purrina-apps.apps.core-ocp.kemo.labs

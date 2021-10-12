@@ -3,8 +3,9 @@ import logging
 import os
 import json
 import mysql.connector
-from flask import request, jsonify, Flask
+from flask import request, jsonify, Flask, make_response
 from flask_restful import Resource, Api, reqparse
+from flask_cors import CORS
 
 ##############################################################################
 # Set Variables and Global References
@@ -20,8 +21,8 @@ API_PORT = os.getenv('API_PORT', '8080')
 # MySQL
 DB_USER = os.getenv('DB_USER', 'petadoption')
 DB_PASS = os.getenv('DB_PASS', 'petadoptionP455')
-DB_HOST = os.getenv('database-host', 'petadoption-db')
-DB_DB = os.getenv('DB_HOST', 'petadoption')
+DB_HOST = os.getenv('DB_HOST', 'petadoption-db')
+DB_DB = os.getenv('DB_DB', 'petadoption')
 
 # Replace with an actual query of the JWT User ID
 USER_ID=1
@@ -40,7 +41,7 @@ class Pets(Resource):
         myresult = mycursor.fetchall()
         for x in myresult:
           pets.append(myresult)
-        return {'pets': json.dumps(pets, indent=4, sort_keys=True, default=str)}, 200  # return data and 200 OK code
+        return make_response(jsonify({'pets': json.dumps(pets, indent=4, sort_keys=True, default=str)}), 200)
 
 class Pet(Resource):
     def get(self):
@@ -54,30 +55,21 @@ class Pet(Resource):
         myresult = mycursor.fetchall()
         for x in myresult:
           pets.append(myresult)
-        return {'pet': json.dumps(pets, indent=4, sort_keys=True, default=str)}, 200  # return data and 200 OK code
+        return make_response(jsonify({'pet': json.dumps(pets, indent=4, sort_keys=True, default=str)}), 200)
 
 class Submissions(Resource):
     def get(self):
-        query = "SELECT * FROM adoption_submissions WHERE"
-        to_filter = []
-
-        if USER_ID:
-            query += ' user_id=?'
-            to_filter.append(USER_ID)
-        if not (USER_ID):
-            return page_not_found(404)
-
-        query = query + ';'
 
         mydb = mysql.connector.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_DB)
         mycursor = mydb.cursor()
-        mycursor.execute(query, to_filter)
+        parames = (str(USER_ID))
+        mycursor.execute("SELECT * FROM adoption_submissions WHERE user_id="+str(USER_ID))
 
         pets = []
         myresult = mycursor.fetchall()
         for x in myresult:
           pets.append(myresult)
-        return {'submissions': json.dumps(pets, indent=4, sort_keys=True, default=str)}, 200  # return data and 200 OK code
+        return make_response(jsonify({'submissions': json.dumps(pets, indent=4, sort_keys=True, default=str)}), 200 )
 
 
 api.add_resource(Pets, '/pets')

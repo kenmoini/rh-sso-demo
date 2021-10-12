@@ -17,4 +17,5 @@ spec:
     targetPort: furever-home-backend
   tls:
     termination: edge
+    insecureEdgeTerminationPolicy: Redirect
   wildcardPolicy: None
