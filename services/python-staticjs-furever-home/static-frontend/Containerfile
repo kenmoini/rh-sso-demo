@@ -7,10 +7,7 @@ COPY app/ /var/www/html/
 RUN npm i \
  && npm run css-compile \
  && npx webpack \
+ && chown -R 1001:1001 . \
  && chmod -R 777 .
 
 USER 1001
-
-FROM registry.access.redhat.com/ubi8/httpd-24:latest
-
-COPY --from=BUILDER /var/www/html/ /var/www/html/

@@ -24,13 +24,13 @@ oc apply -f deploy-rh-amq-streams/
 
 ######## Deploy RH SSO
 logHeader "Deploying RH SSO..."
-oc new-project ${NS_SSO}
+oc new-project ${NS_SSO} > /dev/null 2>&1
 oc apply -n ${NS_SSO} -f deploy-rh-sso/
 
 ######## Deploy RH 3Scale
 ## Create a namespace
 logHeader "Deploying 3Scale..."
-oc new-project ${NS_3SCALE}
+oc new-project ${NS_3SCALE} > /dev/null 2>&1
 
 ## Create a RH Registry Pull Secret https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.10/html-single/installing_3scale/index#creating-a-registry-service-account
 oc apply -f ~/rh-registry-secret.yaml -n ${NS_3SCALE}
@@ -43,8 +43,6 @@ until oc get customresourcedefinition apimanagers.apps.3scale.net; do sleep 10; 
 oc apply -f deploy-rh-3scale/operator/step2/ -n ${NS_3SCALE}
 
 until oc rollout status dc/apicast-production -n ${NS_3SCALE}; do sleep 10; done
-
-sleep 10
 
 ## The Master URL
 until [ $(oc get routes -n ${NS_3SCALE} --selector='zync.3scale.net/route-to=system-master' -o=json | jq -r '.items | length') -eq 1 ]; do sleep 10; done
@@ -62,36 +60,7 @@ THRSCALE_MASTER_PASS=$(oc get secret -n ${NS_3SCALE} system-seed -o json | jq -r
 THRSCALE_ADMIN_USER=$(oc get secret -n ${NS_3SCALE} system-seed -o json | jq -r .data.ADMIN_USER | base64 -d)
 THRSCALE_ADMIN_PASS=$(oc get secret -n ${NS_3SCALE} system-seed -o json | jq -r .data.ADMIN_PASSWORD | base64 -d)
 
-######## Deploy PetID Application
-logHeader "Deploying Applications..."
-oc new-project ${NS_APPS}
-
-######## Deploy Furever Safe
-
-######## Deploy Furever Home
-## Frontend
-logHeader "Deploying Furever Home - Frontend..."
-oc apply -n ${NS_APPS} -f services/python-staticjs-furever-home/static-frontend/openshift/
-
-## Add Adoptee
-logHeader "Deploying Furever Home - Add Adoptee Microservice..."
-oc apply -n ${NS_APPS} -f services/python-staticjs-furever-home/python-add-adoptee-usvc/openshift/kafka-instance/
-until oc rollout status -n ${NS_APPS} deployment/pet-cluster-entity-operator; do sleep 10; done
-oc apply -n ${NS_APPS} -f services/python-staticjs-furever-home/python-add-adoptee-usvc/openshift/kafka-topic/
-oc apply -n ${NS_APPS} -f services/python-staticjs-furever-home/python-add-adoptee-usvc/openshift/add-adoptee-usvc/
-
-## Process Adoptee
-logHeader "Deploying Furever Home - Process Adoptee Microservice..."
-oc apply -n ${NS_APPS} -f services/python-staticjs-furever-home/python-process-adoptee-usvc/openshift/database/
-until oc rollout status -n ${NS_APPS} dc/petadoption-db; do sleep 10; done
-oc apply -n ${NS_APPS} -f services/python-staticjs-furever-home/python-process-adoptee-usvc/openshift/database-config/
-echo "Waiting for DB Population Job to finish..."
-until [ $(oc get jobs -n ${NS_APPS} --selector='component==dbpopulate-job' -o=json | jq -r '.items[0].status.succeeded') -eq 1 ]; do sleep 10; done
-oc apply -n ${NS_APPS} -f services/python-staticjs-furever-home/python-process-adoptee-usvc/openshift/process-adoptee-usvc/
-
-## Backend
-logHeader "Deploying Furever Home - Backend..."
-oc apply -n ${NS_APPS} -f services/python-staticjs-furever-home/python-backend/openshift/
+./app-deployment.sh
 
 ######## Finished!
 logHeader "Deployment COMPLETE!"

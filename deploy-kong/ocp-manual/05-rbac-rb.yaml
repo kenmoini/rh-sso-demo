@@ -6,7 +6,6 @@ metadata:
   name: sa-rbinding
   namespace: kong
 subjects:
-subjects:
 - kind: ServiceAccount
   name: my-kong-kong
   namespace: kong

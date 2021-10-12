@@ -21,6 +21,6 @@ CREATE TABLE `adoption_submissions` (
   `pet_adoptee_id` int(9) unsigned NOT NULL,
   `status` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp DEFAULT NULL
+  `updated_at` timestamp NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
