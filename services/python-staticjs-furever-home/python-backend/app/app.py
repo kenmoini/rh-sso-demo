@@ -35,7 +35,7 @@ class Pets(Resource):
     def get(self):
         mydb = mysql.connector.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_DB)
         mycursor = mydb.cursor()
-        mycursor.execute("SELECT * FROM pet_adoptees")
+        mycursor.execute("SELECT * FROM pet_adoptees LIMIT 50")
 
         pets = []
         myresult = mycursor.fetchall()
@@ -49,7 +49,7 @@ class Pet(Resource):
         petID = query_parameters.get('id')
         mydb = mysql.connector.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_DB)
         mycursor = mydb.cursor()
-        mycursor.execute("SELECT * FROM pet_adoptees")
+        mycursor.execute("SELECT * FROM pet_adoptees LIMIT 50")
 
         pets = []
         myresult = mycursor.fetchall()
@@ -63,7 +63,7 @@ class Submissions(Resource):
         mydb = mysql.connector.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_DB)
         mycursor = mydb.cursor()
         parames = (str(USER_ID))
-        mycursor.execute("SELECT * FROM adoption_submissions WHERE user_id="+str(USER_ID))
+        mycursor.execute("SELECT * FROM adoption_submissions WHERE user_id="+str(USER_ID)+" LIMIT 50")
 
         pets = []
         myresult = mycursor.fetchall()

@@ -20,6 +20,7 @@ spec:
     spec:
       containers:
       - name: pet-id-frontend
+        imagePullPolicy: Always
         image: quay.io/kenmoini/pet-id-frontend:latest
         ports:
         - containerPort: 8080
