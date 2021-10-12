@@ -86,3 +86,16 @@ until oc rollout status -n ${NS_APPS} dc/petadoption-db; do sleep 10; done
 
 oc apply -n ${NS_APPS} -f services/python-staticjs-furever-home/python-process-adoptee-usvc/openshift/database-config/
 oc apply -n ${NS_APPS} -f services/python-staticjs-furever-home/python-process-adoptee-usvc/openshift/process-adoptee-usvc/
+
+######## Finished!
+logHeader "Deployment COMPLETE!"
+echo -e "===== 3Scale Information\n"
+echo -e "3Scale Master URL: ${THRSCALE_MASTER_URL}"
+echo -e "3Scale Master Username: ${THRSCALE_MASTER_USER}"
+echo -e "3Scale Master Password: ${THRSCALE_MASTER_PASS}"
+echo -e "\n3Scale Admin URL: ${THRSCALE_ADMIN_URL}"
+echo -e "3Scale Admin Username: ${THRSCALE_ADMIN_USER}"
+echo -e "3Scale Admin Password: ${THRSCALE_ADMIN_PASS}"
+
+echo -e "\n===== Red Hat SSO Information\n"
+echo -e "\n===== Application Information\n"
