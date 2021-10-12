@@ -42,7 +42,7 @@ class Pets(Resource):
         for x in myresult:
             pets.append(myresult)
 
-        response = (json.dumps(pets, indent=4, sort_keys=True, default=str))
+        response = jsonify(pets=json.dumps(pets, indent=4, sort_keys=True, default=str))
 
         # Enable Access-Control-Allow-Origin
         response.headers.add("Access-Control-Allow-Origin", "*")
