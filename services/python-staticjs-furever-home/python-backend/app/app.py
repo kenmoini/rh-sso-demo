@@ -62,12 +62,12 @@ class Submissions(Resource):
         to_filter = []
 
         if USER_ID:
-            query += ' user_id=? AND'
+            query += ' user_id=?'
             to_filter.append(USER_ID)
         if not (USER_ID):
             return page_not_found(404)
 
-        query = query[:-4] + ';'
+        query = query + ';'
 
         mydb = mysql.connector.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_DB)
         mycursor = mydb.cursor()
