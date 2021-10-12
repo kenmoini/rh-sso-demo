@@ -31,7 +31,6 @@ metadata:
   labels:
     app: rh-sso
   name: rh-sso
-  namespace: rh-sso-demo
 spec:
   ports:
     - name: rh-sso
@@ -52,7 +51,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: rh-sso-discovery
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
 spec:
@@ -76,7 +74,6 @@ metadata:
   annotations:
     description: The monitoring service for Prometheus
   name: rh-sso-monitoring
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
 spec:
@@ -99,7 +96,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: rh-sso-postgresql
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
 spec:
@@ -122,7 +118,6 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: rh-sso
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
 spec:
@@ -145,7 +140,6 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: rh-sso-metrics-rewrite
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
 spec:
@@ -167,7 +161,6 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: rh-sso-myrealm-metrics-rewrite
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
 spec:
@@ -199,7 +192,6 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: credential-rh-sso
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
 data:
@@ -232,7 +224,6 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: rh-sso-db-secret
-  namespace: rh-sso-demo
 data:
   POSTGRES_DATABASE: cmhzc28=
   POSTGRES_HOST: cmgtc3NvLXBvc3RncmVzcWw=
@@ -250,7 +241,6 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: rh-sso-probes
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
 data:
@@ -269,7 +259,6 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: rh-sso-postgresql-claim
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
 spec:
@@ -288,7 +277,6 @@ kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: rh-sso-postgresql
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
     app.kubernetes.io/part-of: rh-sso
@@ -302,7 +290,6 @@ spec:
   template:
     metadata:
       name: rh-sso-postgresql
-      namespace: rh-sso-demo
       creationTimestamp: null
       labels:
         app: rh-sso
@@ -378,7 +365,6 @@ kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: rh-sso
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
     app.kubernetes.io/part-of: rh-sso
@@ -392,7 +378,6 @@ spec:
   template:
     metadata:
       name: rh-sso
-      namespace: rh-sso-demo
       creationTimestamp: null
       labels:
         app: rh-sso

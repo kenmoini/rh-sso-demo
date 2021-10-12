@@ -3,7 +3,6 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: rh-sso-probes
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
     app.kubernetes.io/part-of: rh-sso

@@ -3,7 +3,6 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: rh-sso-postgresql-claim
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
     app.kubernetes.io/part-of: rh-sso

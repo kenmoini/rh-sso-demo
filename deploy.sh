@@ -1,8 +1,8 @@
 #!/bin/bash
 
-NS_3SCALE="purrina-demo"
-NS_SSO="purrina-demo"
-NS_APPS="purrina-apps"
+NS_3SCALE="a-rh-sso-demo"
+NS_SSO="a-rh-sso-demo"
+NS_APPS="a-rh-sso-demo"
 
 function logHeader() {
   echo -e "\n======================================================================"
@@ -25,7 +25,7 @@ oc apply -f deploy-rh-amq-streams/
 ######## Deploy RH SSO
 logHeader "Deploying RH SSO..."
 oc new-project ${NS_SSO} > /dev/null 2>&1
-oc apply -n ${NS_SSO} -f deploy-rh-sso/
+oc apply --namespace=${NS_SSO} -f deploy-rh-sso/
 
 ######## Deploy RH 3Scale
 ## Create a namespace
@@ -33,32 +33,32 @@ logHeader "Deploying 3Scale..."
 oc new-project ${NS_3SCALE} > /dev/null 2>&1
 
 ## Create a RH Registry Pull Secret https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.10/html-single/installing_3scale/index#creating-a-registry-service-account
-oc apply -f ~/rh-registry-secret.yaml -n ${NS_3SCALE}
+oc apply --namespace=${NS_3SCALE} -f ~/rh-registry-secret.yaml
 
 ## Deploy the 3Scale Operator
-oc apply -f deploy-rh-3scale/operator/step1/ -n ${NS_3SCALE}
+oc apply --namespace=${NS_3SCALE} -f deploy-rh-3scale/operator/step1/
 
 until oc get customresourcedefinition apimanagers.apps.3scale.net; do sleep 10; done
 
-oc apply -f deploy-rh-3scale/operator/step2/ -n ${NS_3SCALE}
+oc apply --namespace=${NS_3SCALE} -f deploy-rh-3scale/operator/step2/
 
-until oc rollout status dc/apicast-production -n ${NS_3SCALE}; do sleep 10; done
+until oc rollout status --namespace=${NS_3SCALE} dc/apicast-production; do sleep 10; done
 
 ## The Master URL
-until [ $(oc get routes -n ${NS_3SCALE} --selector='zync.3scale.net/route-to=system-master' -o=json | jq -r '.items | length') -eq 1 ]; do sleep 10; done
-THRSCALE_MASTER_URL=$(oc get routes -n ${NS_3SCALE} --selector='zync.3scale.net/route-to=system-master' -o=jsonpath='{.items[0].spec.host}')
+until [ $(oc get routes --namespace=${NS_3SCALE} --selector='zync.3scale.net/route-to=system-master' -o=json | jq -r '.items | length') -eq 1 ]; do sleep 10; done
+THRSCALE_MASTER_URL=$(oc get routes --namespace=${NS_3SCALE} --selector='zync.3scale.net/route-to=system-master' -o=jsonpath='{.items[0].spec.host}')
 
 ## The Admin URL
-until [ $(oc get routes -n ${NS_3SCALE} --selector='zync.3scale.net/route-to=system-provider' -o=json | jq -r '.items | length') -eq 1 ]; do sleep 10; done
-THRSCALE_ADMIN_URL=$(oc get routes -n ${NS_3SCALE} --selector='zync.3scale.net/route-to=system-provider' -o=jsonpath='{.items[0].spec.host}')
+until [ $(oc get routes --namespace=${NS_3SCALE} --selector='zync.3scale.net/route-to=system-provider' -o=json | jq -r '.items | length') -eq 1 ]; do sleep 10; done
+THRSCALE_ADMIN_URL=$(oc get routes --namespace=${NS_3SCALE} --selector='zync.3scale.net/route-to=system-provider' -o=jsonpath='{.items[0].spec.host}')
 
 ## The Master Credentials
-THRSCALE_MASTER_USER=$(oc get secret -n ${NS_3SCALE} system-seed -o json | jq -r .data.MASTER_USER | base64 -d)
-THRSCALE_MASTER_PASS=$(oc get secret -n ${NS_3SCALE} system-seed -o json | jq -r .data.MASTER_PASSWORD | base64 -d)
+THRSCALE_MASTER_USER=$(oc get secret --namespace=${NS_3SCALE} system-seed -o json | jq -r .data.MASTER_USER | base64 -d)
+THRSCALE_MASTER_PASS=$(oc get secret --namespace=${NS_3SCALE} system-seed -o json | jq -r .data.MASTER_PASSWORD | base64 -d)
 
 ## The Admin Credentials
-THRSCALE_ADMIN_USER=$(oc get secret -n ${NS_3SCALE} system-seed -o json | jq -r .data.ADMIN_USER | base64 -d)
-THRSCALE_ADMIN_PASS=$(oc get secret -n ${NS_3SCALE} system-seed -o json | jq -r .data.ADMIN_PASSWORD | base64 -d)
+THRSCALE_ADMIN_USER=$(oc get secret --namespace=${NS_3SCALE} system-seed -o json | jq -r .data.ADMIN_USER | base64 -d)
+THRSCALE_ADMIN_PASS=$(oc get secret --namespace=${NS_3SCALE} system-seed -o json | jq -r .data.ADMIN_PASSWORD | base64 -d)
 
 ./app-deployment.sh
 

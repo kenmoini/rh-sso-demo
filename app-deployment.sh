@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NS_APPS="purrina-apps"
+NS_APPS="a-rh-sso-demo"
 
 function logHeader() {
   echo -e "\n======================================================================"

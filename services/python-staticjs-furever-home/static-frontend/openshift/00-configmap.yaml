@@ -9,8 +9,8 @@ metadata:
     component: configmap
 data:
   overrides.js: |
-    var API_ENDPOINT = "https://furever-home-backend-purrina-apps.apps.core-ocp.kemo.labs";
-    var JUDGE_ENDPOINT = "https://furever-home-adoption-judge-usvc-purrina-apps.apps.core-ocp.kemo.labs";
+    var API_ENDPOINT = "https://furever-home-backend-a-rh-sso-demo.apps.core-ocp.kemo.labs";
+    var JUDGE_ENDPOINT = "https://furever-home-adoption-judge-usvc-a-rh-sso-demo.apps.core-ocp.kemo.labs";
     var USER_ID = 1;
   functions.js: |
     console.log('hello from the functions file!');

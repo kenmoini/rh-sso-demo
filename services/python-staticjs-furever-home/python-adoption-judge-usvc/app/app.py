@@ -50,9 +50,14 @@ class Adopt(Resource):
         try:
             cnx = mysql.connector.connect(user=DB_USER, password=DB_PASS, host=DB_HOST, database=DB_DB)
 
+            mycursor = cnx.cursor()
+            mycursor.execute("SELECT * FROM pet_adoptees WHERE id="+str(args['pet_id'])+"")
+            myresult = mycursor.fetchone()
+            mycursor.close()
+
             cursor = cnx.cursor()
-            query = "INSERT INTO adoption_submissions(user_id, pet_adoptee_id, status, updated_at, pet_name, pet_city, pet_locale) VALUES (%s, %s, %s, current_timestamp());"
-            values = (args['user_id'], args['pet_id'], decision)
+            query = "INSERT INTO adoption_submissions(user_id, pet_adoptee_id, status, updated_at, pet_name, pet_city, pet_locale) VALUES (%s, %s, %s, current_timestamp(), %s, %s, %s);"
+            values = (args['user_id'], args['pet_id'], decision, myresult.name, myresult.city, myresult.locale)
             cursor.execute(query, values)
             cnx.commit()
             cursor.close()

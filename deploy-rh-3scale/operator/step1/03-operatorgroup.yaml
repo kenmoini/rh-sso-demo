@@ -2,8 +2,7 @@
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
-  name: rh-3scale-demo
-  namespace: rh-3scale-demo
+  name: a-rh-sso-demo
 spec:
   targetNamespaces:
-    - rh-3scale-demo
+    - a-rh-sso-demo

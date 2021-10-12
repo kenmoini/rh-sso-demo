@@ -5,7 +5,6 @@ metadata:
   annotations:
     description: The monitoring service for Prometheus
   name: rh-sso-monitoring
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
     app.kubernetes.io/part-of: rh-sso

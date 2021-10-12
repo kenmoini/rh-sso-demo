@@ -10,7 +10,6 @@ metadata:
     app.kubernetes.io/part-of: rh-sso
     component: service
   name: rh-sso
-  namespace: rh-sso-demo
 spec:
   ports:
     - name: rh-sso

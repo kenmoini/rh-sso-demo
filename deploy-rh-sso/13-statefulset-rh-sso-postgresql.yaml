@@ -3,7 +3,6 @@ kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: rh-sso-postgresql
-  namespace: rh-sso-demo
   labels:
     app: rh-sso
     app.kubernetes.io/part-of: rh-sso
@@ -17,7 +16,6 @@ spec:
   template:
     metadata:
       name: rh-sso-postgresql
-      namespace: rh-sso-demo
       creationTimestamp: null
       labels:
         app: rh-sso
