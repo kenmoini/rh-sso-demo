@@ -5,42 +5,42 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   # Enable version updates for npm for PetID
   - package-ecosystem: "npm"
     directory: "/services/go-nodejs-pet-id/app-vue/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   # Maintain dependencies for Go modules for PetID
   - package-ecosystem: "gomod"
     directory: "/services/go-nodejs-pet-id/go-usvc/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   # Maintain dependencies for Composer
   - package-ecosystem: "composer"
     directory: "/services/php-furever-safe/furever-safe-app"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - package-ecosystem: "pip"
     directory: "/services/python-staticjs-furever-home/python-backend/app"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - package-ecosystem: "pip"
     directory: "/services/python-staticjs-furever-home/python-add-adoptee-usvc/app"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - package-ecosystem: "pip"
     directory: "/services/python-staticjs-furever-home/python-process-adoptee-usvc/app"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - package-ecosystem: "npm"
     directory: "/services/python-staticjs-furever-home/static-frontend/app"
     schedule:
-      interval: "daily"
+      interval: "weekly"
