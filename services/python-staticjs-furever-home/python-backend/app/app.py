@@ -39,7 +39,7 @@ class Pets(Resource):
         myresult = mycursor.fetchall()
         for x in myresult:
           pets.append(myresult)
-        return {'pets': pets}, 200  # return data and 200 OK code
+        return {'pets': json.dumps(pets, indent=4, sort_keys=True, default=str)}, 200  # return data and 200 OK code
 
 class Pet(Resource):
     def get(self):
@@ -53,7 +53,7 @@ class Pet(Resource):
         myresult = mycursor.fetchall()
         for x in myresult:
           pets.append(myresult)
-        return {'pet': pets}, 200  # return data and 200 OK code
+        return {'pet': json.dumps(pets, indent=4, sort_keys=True, default=str)}, 200  # return data and 200 OK code
 
 class Submissions(Resource):
     def get(self):
@@ -76,7 +76,7 @@ class Submissions(Resource):
         myresult = mycursor.fetchall()
         for x in myresult:
           pets.append(myresult)
-        return {'submissions': pets}, 200  # return data and 200 OK code
+        return {'submissions': json.dumps(pets, indent=4, sort_keys=True, default=str)}, 200  # return data and 200 OK code
 
 
 api.add_resource(Pets, '/pets')

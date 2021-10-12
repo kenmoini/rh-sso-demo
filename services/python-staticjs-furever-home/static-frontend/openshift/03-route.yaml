@@ -16,5 +16,5 @@ spec:
   port:
     targetPort: furever-home-frontend
   tls:
-    termination: reencrypt
+    termination: edge
   wildcardPolicy: None
