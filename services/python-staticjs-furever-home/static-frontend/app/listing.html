@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="assets/css/starter.css">
     <title>Furever Home - Open Adoptions</title>
   </head>
-  <body>
+  <body onload="initKeycloak()">
     <div class="col-md-8 py-5 px-3 mx-auto">
 
       <header class="pb-3 mb-5 border-bottom">
@@ -141,7 +141,9 @@
   <script type="text/javascript" src="assets/js/container/overrides.js"></script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="assets/js/dist/starter.js"></script>
+  <script src="node_modules/keycloak-js/dist/keycloak.min.js"></script>
+  <script src="assets/js/container/keycloak-shared.js"></script>
+  <script src="assets/js/dist/starter.js"></script>
   <script type="text/javascript" src="assets/js/container/functions.js"></script>
 
     <script type="text/javascript">
@@ -189,6 +191,7 @@
           success: function (data, status, xhr) {
             jQuery('#exampleModal').modal('hide');
             jQuery('#exampleModalSuccess').modal('show');
+            jQuery(petID).parent().remove();
           },
           error: function (data, status, xhr) {
             jQuery('#exampleModal').modal('hide');

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: furever-home-adoption-judge-usvc
+  labels:
+    app: furever-home-adoption-judge-usvc
+    app.kubernetes.io/name: furever-home-adoption-judge-usvc
+    app.kubernetes.io/part-of: furever-home-adoption-judge-usvc
+    component: deployment
+  annotations:
+    app.openshift.io/connects-to: >-
+      [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"petadoption-db"}]
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: furever-home-adoption-judge-usvc
+  template:
+    metadata:
+      labels:
+        app: furever-home-adoption-judge-usvc
+    spec:
+      containers:
+      - name: furever-home-adoption-judge-usvc
+        imagePullPolicy: Always
+        image: quay.io/kenmoini/furever-home-adoption-judge-usvc:latest
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+        env:
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                key: database-user
+                name: petadoption-db
+          - name: DB_PASS
+            valueFrom:
+              secretKeyRef:
+                key: database-password
+                name: petadoption-db
+          - name: DB_HOST
+            value: petadoption-db
+          - name: DB_DB
+            valueFrom:
+              secretKeyRef:
+                key: database-name
+                name: petadoption-db

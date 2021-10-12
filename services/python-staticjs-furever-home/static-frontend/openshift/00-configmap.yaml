@@ -9,4 +9,20 @@ metadata:
     component: configmap
 data:
   overrides.js: |
-    var API_ENDPOINT = "https://furever-home-backend-purrina-apps.apps.core-ocp.kemo.labs"
+    var API_ENDPOINT = "https://furever-home-backend-purrina-apps.apps.core-ocp.kemo.labs";
+    var JUDGE_ENDPOINT = "https://furever-home-adoption-judge-usvc-purrina-apps.apps.core-ocp.kemo.labs";
+  functions.js: |
+    console.log('hello from the functions file!');
+  keycloak-shared.js: |
+    function initKeycloak() {
+      var keycloak = new Keycloak({
+        url: '',
+        realm: '',
+        clientId: ''
+      });
+      keycloak.init().then(function(authenticated) {
+          alert(authenticated ? 'authenticated' : 'not authenticated');
+      }).catch(function() {
+          alert('failed to initialize');
+      });
+    }

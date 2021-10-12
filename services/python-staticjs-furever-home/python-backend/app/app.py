@@ -47,7 +47,6 @@ class Pets(Resource):
         # Enable Access-Control-Allow-Origin
         response.headers.add("Access-Control-Allow-Origin", "*")
         return response
-        #return make_response(jsonify({'pets': json.dumps(pets, indent=4, sort_keys=True, default=str)}), 200)
 
 class Pet(Resource):
     def get(self):
@@ -67,7 +66,6 @@ class Pet(Resource):
         # Enable Access-Control-Allow-Origin
         response.headers.add("Access-Control-Allow-Origin", "*")
         return response
-        #return make_response(jsonify({'pet': json.dumps(pets, sort_keys=True, default=str)}), 200)
 
 class Submissions(Resource):
     def get(self):
@@ -87,7 +85,6 @@ class Submissions(Resource):
         # Enable Access-Control-Allow-Origin
         response.headers.add("Access-Control-Allow-Origin", "*")
         return response
-        #return make_response(jsonify({'submissions': json.dumps(pets, indent=4, sort_keys=True, default=str)}), 200 )
 
 
 api.add_resource(Pets, '/pets')

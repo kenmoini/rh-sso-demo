@@ -41,3 +41,7 @@ spec:
             items:
               - key: "overrides.js"
                 path: "overrides.js"
+              - key: "functions.js"
+                path: "functions.js"
+              - key: "keycloak-shared.js"
+                path: "keycloak-shared.js"
