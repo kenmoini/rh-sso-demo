@@ -1,0 +1,20 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  name: kong-anyuid
+  namespace: kong
+rules:
+- apiGroups:
+  - security.openshift.io
+  resourceNames:
+  - anyuid
+  - privileged
+  - hostnetwork
+  - hostaccess
+  - nonroot
+  - hostmount-anyuid
+  resources:
+  - securitycontextconstraints
+  verbs:
+  - use

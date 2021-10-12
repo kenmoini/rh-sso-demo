@@ -13,18 +13,18 @@ oc apply -f ~/rh-registry-secret.yaml -n rh-3scale-demo
 oc apply -f operator/ -n rh-3scale-demo
 
 ## The Master URL
-oc get routes --selector='zync.3scale.net/route-to=system-master' -o=jsonpath='{.items[0].spec.host}'
+oc get routes -n rh-3scale-demo --selector='zync.3scale.net/route-to=system-master' -o=jsonpath='{.items[0].spec.host}'
 
 ## The Admin Credentials
-oc get secret system-seed -o json | jq -r .data.MASTER_USER | base64 -d
-oc get secret system-seed -o json | jq -r .data.MASTER_PASSWORD | base64 -d
+oc get secret -n rh-3scale-demo system-seed -o json | jq -r .data.MASTER_USER | base64 -d
+oc get secret -n rh-3scale-demo system-seed -o json | jq -r .data.MASTER_PASSWORD | base64 -d
 
 ## The Admin URL
-oc get routes --selector='zync.3scale.net/route-to=system-provider' -o=jsonpath='{.items[0].spec.host}'
+oc get routes -n rh-3scale-demo --selector='zync.3scale.net/route-to=system-provider' -o=jsonpath='{.items[0].spec.host}'
 
 ## The Admin Credentials
-oc get secret system-seed -o json | jq -r .data.ADMIN_USER | base64 -d
-oc get secret system-seed -o json | jq -r .data.ADMIN_PASSWORD | base64 -d
+oc get secret -n rh-3scale-demo system-seed -o json | jq -r .data.ADMIN_USER | base64 -d
+oc get secret -n rh-3scale-demo system-seed -o json | jq -r .data.ADMIN_PASSWORD | base64 -d
 ```
 
 ## Deletion

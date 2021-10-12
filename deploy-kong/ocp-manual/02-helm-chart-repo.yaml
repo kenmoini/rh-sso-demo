@@ -1,0 +1,8 @@
+apiVersion: helm.openshift.io/v1beta1
+kind: HelmChartRepository
+metadata:
+  name: kong-repo
+spec:
+  name: kong-repo
+  connectionConfig:
+    url: https://charts.konghq.com

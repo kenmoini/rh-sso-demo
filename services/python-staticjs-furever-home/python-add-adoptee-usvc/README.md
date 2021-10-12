@@ -29,7 +29,7 @@ python3 app.py
 1. Deploy a Kafka Cluster and Topic - Red Hat AMQ Streams Operator needs to already be installed
 
 ```bash
-export OC_NAMESPACE="furever-home-add-adoptee"
+export OC_NAMESPACE="furever-home"
 oc new-project ${OC_NAMESPACE}
 
 oc apply -n ${OC_NAMESPACE} -f openshift/kafka-instance/

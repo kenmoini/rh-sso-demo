@@ -1,0 +1,11 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: kong
+  labels:
+    kubernetes.io/metadata.name: kong
+  annotations:
+    openshift.io/description: 'Kong API Gateway'
+    openshift.io/display-name: 'Kong API Gateway'
+spec: {}

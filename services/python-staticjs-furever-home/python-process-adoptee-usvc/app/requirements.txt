@@ -1,0 +1,2 @@
+kafka-python
+mysql-connector-python==8.0.*
