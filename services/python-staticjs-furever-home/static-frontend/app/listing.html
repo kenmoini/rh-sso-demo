@@ -181,14 +181,19 @@
         e.preventDefault();
         petName = jQuery(this).find('img.card-img-top').attr('alt');
         jQuery('.text-petName').text(petName);
+        jQuery('#exampleModal button.btn-primary').attr('data-pet-id', jQuery(this).attr('id'));
         jQuery('#exampleModal').modal('show');
       });
       jQuery(document).on('click', '#exampleModal button.btn-primary', function(e) {
         e.preventDefault();
-        petID = jQuery(this).attr('id');
-        personID = "something";
+        petID = jQuery(this).attr('data-pet-id');
         // Submit to microservice
-        jQuery.ajax(API_ENDPOINT + '/pets', {
+        jQuery.ajax({
+          
+          method: "POST",
+          url: JUDGE_ENDPOINT + '/adopt',
+          data: { pet_id: petID.replace("petID-", ""), user_id: USER_ID },
+  
           success: function (data, status, xhr) {
             jQuery('#exampleModal').modal('hide');
             jQuery('#exampleModalSuccess').modal('show');
