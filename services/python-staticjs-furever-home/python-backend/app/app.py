@@ -42,7 +42,7 @@ class Pets(Resource):
         for x in myresult:
             pets.append(myresult)
 
-        response = jsonify(pets=json.dumps(pets, indent=4, sort_keys=True, default=str))
+        response = jsonify(pets=json.dumps(pets, sort_keys=True, default=str))
 
         # Enable Access-Control-Allow-Origin
         response.headers.add("Access-Control-Allow-Origin", "*")
@@ -61,7 +61,13 @@ class Pet(Resource):
         myresult = mycursor.fetchall()
         for x in myresult:
             pets.append(myresult)
-        return make_response(jsonify({'pet': json.dumps(pets, indent=4, sort_keys=True, default=str)}), 200)
+
+        response = jsonify(pets=json.dumps(pets, sort_keys=True, default=str))
+
+        # Enable Access-Control-Allow-Origin
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
+        #return make_response(jsonify({'pet': json.dumps(pets, sort_keys=True, default=str)}), 200)
 
 class Submissions(Resource):
     def get(self):
@@ -75,7 +81,13 @@ class Submissions(Resource):
         myresult = mycursor.fetchall()
         for x in myresult:
             pets.append(myresult)
-        return make_response(jsonify({'submissions': json.dumps(pets, indent=4, sort_keys=True, default=str)}), 200 )
+
+        response = jsonify(submissions=json.dumps(pets, sort_keys=True, default=str))
+
+        # Enable Access-Control-Allow-Origin
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
+        #return make_response(jsonify({'submissions': json.dumps(pets, indent=4, sort_keys=True, default=str)}), 200 )
 
 
 api.add_resource(Pets, '/pets')
