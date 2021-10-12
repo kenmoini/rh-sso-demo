@@ -1,7 +1,7 @@
 #!/bin/bash
 
-NS_3SCALE="rh-3scale-demo"
-NS_SSO="rh-sso-demo"
+NS_3SCALE="purrina-demo"
+NS_SSO="purrina-demo"
 NS_APPS="purrina-apps"
 
 function logHeader() {

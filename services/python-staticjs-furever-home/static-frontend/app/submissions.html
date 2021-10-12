@@ -31,29 +31,10 @@
               <tr>
                 <th scope="col">Date</th>
                 <th scope="col">Name</th>
-                <th scope="col">Location</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Biggie</td>
-                <td>New York, New York</td>
-                <td>Approved</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Biggie</td>
-                <td>New York, New York</td>
-                <td>Denied</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Biggie</td>
-                <td>New York, New York</td>
-                <td>Approved</td>
-              </tr>
+            <tbody id="itemHolder">
             </tbody>
           </table>
 
@@ -64,6 +45,17 @@
 
       <p class="text-muted">Created with love and belly scratches.</p>
     </div>
+    <div class="d-none" id="templates">
+      <table>
+        <tbody>
+          <tr class="submissionRow">
+            <th scope="row" class="text-created-at">1</th>
+            <td class="text-name"></td>
+            <td class="text-status"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <script type="text/javascript" src="assets/js/container/overrides.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -72,6 +64,34 @@
     <script src="assets/js/container/keycloak-shared.js"></script>
     <script src="assets/js/dist/starter.js"></script>
     <script type="text/javascript" src="assets/js/container/functions.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function(e) {
+        jQuery.ajax(API_ENDPOINT + '/submissions', {
+          success: function (data, status, xhr) {
+            jsonO = JSON.parse(data.submissions);
+            jsonI = jsonO[0]
+            for(var i = 0; i < jsonI.length; i++) {
+              var obj = jsonI[i];
+              rowID = obj[0];
+              userID = obj[1];
+              pet_adoptee_id = obj[2];
+              pet_name = obj[3];
+              pet_city = obj[4];
+              pet_locale = obj[5];
+              statusText = obj[6];
+              updated_at = obj[7];
+              updated_at = obj[8];
+              
+              template = jQuery("#templates .submissionRow").clone();
+              template.find('.text-name').text(pet_name);
+              template.find('.text-status').text(statusText);
+              template.find('.text-created-at').text(created_at);
+              jQuery("#itemHolder").append(template);
+            }
+          }
+        });
+      });
+    </script>
 
   </body>
 </html>

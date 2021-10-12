@@ -70,10 +70,12 @@ class Pet(Resource):
 class Submissions(Resource):
     def get(self):
 
+        query_parameters = request.args
+        userID = query_parameters.get('user_id')
+
         mydb = mysql.connector.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_DB)
         mycursor = mydb.cursor()
-        parames = (str(USER_ID))
-        mycursor.execute("SELECT * FROM adoption_submissions WHERE user_id="+str(USER_ID)+" LIMIT 50")
+        mycursor.execute("SELECT * FROM adoption_submissions WHERE user_id="+str(userID)+" LIMIT 50")
 
         pets = []
         myresult = mycursor.fetchall()

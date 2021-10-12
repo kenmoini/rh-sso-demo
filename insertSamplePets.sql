@@ -1,0 +1,12 @@
+INSERT INTO pet_adoptees(type, name, image_url, city, locale) VALUES ('dog', 'Justin', 'https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-bieber.jpg', 'Bacon', 'Indiana');
+INSERT INTO pet_adoptees(type, name, image_url, city, locale) VALUES ('dog', 'Biggie', 'https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-biggie.jpg', 'Bacon', 'Indiana');
+INSERT INTO pet_adoptees(type, name, image_url, city, locale) VALUES ('dog', 'Cowboy', 'https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-cowboy.jpg', 'Bacon', 'Indiana');
+INSERT INTO pet_adoptees(type, name, image_url, city, locale) VALUES ('dog', 'Donny', 'https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-don.jpg', 'Bacon', 'Indiana');
+INSERT INTO pet_adoptees(type, name, image_url, city, locale) VALUES ('dog', 'Dorthy', 'https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-dorthy.jpg', 'Bacon', 'Indiana');
+INSERT INTO pet_adoptees(type, name, image_url, city, locale) VALUES ('dog', 'Einstein', 'https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-einstein.jpg', 'Bacon', 'Indiana');
+INSERT INTO pet_adoptees(type, name, image_url, city, locale) VALUES ('dog', 'Elvis', 'https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-elvis.jpg', 'Bacon', 'Indiana');
+INSERT INTO pet_adoptees(type, name, image_url, city, locale) VALUES ('dog', 'Frieda', 'https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-frieda.jpg', 'Bacon', 'Indiana');
+INSERT INTO pet_adoptees(type, name, image_url, city, locale) VALUES ('dog', 'Jimmy', 'https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-hendricks.jpg', 'Bacon', 'Indiana');
+INSERT INTO pet_adoptees(type, name, image_url, city, locale) VALUES ('dog', 'Bono', 'https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-idk-bono-maybe.jpg', 'Bacon', 'Indiana');
+INSERT INTO pet_adoptees(type, name, image_url, city, locale) VALUES ('dog', 'Jennifer', 'https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-jennifer.jpg', 'Bacon', 'Indiana');
+INSERT INTO pet_adoptees(type, name, image_url, city, locale) VALUES ('dog', 'Pawyer', 'https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-lawyer.jpg', 'Bacon', 'Indiana');

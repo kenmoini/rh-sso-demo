@@ -49,13 +49,22 @@ class Adopt(Resource):
 
         try:
             cnx = mysql.connector.connect(user=DB_USER, password=DB_PASS, host=DB_HOST, database=DB_DB)
-            cursor = cnx.cursor()
 
-            query = "INSERT INTO adoption_submissions(user_id, pet_adoptee_id, status, updated_at) VALUES (%s, %s, %s, current_timestamp());"
+            cursor = cnx.cursor()
+            query = "INSERT INTO adoption_submissions(user_id, pet_adoptee_id, status, updated_at, pet_name, pet_city, pet_locale) VALUES (%s, %s, %s, current_timestamp());"
             values = (args['user_id'], args['pet_id'], decision)
             cursor.execute(query, values)
             cnx.commit()
             cursor.close()
+            
+            if (decision == "approved"):
+                cursor = cnx.cursor()
+                query = "UPDATE pet_adoptees SET adopted_at = current_timestamp(), adopted_by = '%s' WHERE id = %s;"
+                values = (args['user_id'], args['pet_id'])
+                cursor.execute(query, values)
+                cnx.commit()
+                cursor.close()
+            
             cnx.close()
 
             response = jsonify(status="success")
