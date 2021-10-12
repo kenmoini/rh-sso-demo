@@ -23,7 +23,8 @@
       </div>
 
       <hr class="my-5 mx-0">
-      <div class="row">
+      <div class="row" id="itemHolder">
+        <!--
         <div class="col-sm-12 col-md-4">
           <div class="card my-5" style="cursor: pointer;" id="petID-1">
             <img src="https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-biggie.jpg" class="card-img-top" alt="Biggie">
@@ -54,6 +55,7 @@
             </div>
           </div>
         </div>
+        -->
       </div>
 
       <hr class="my-5 mx-0">
@@ -119,6 +121,19 @@
       </div>
     </div>
   </div>
+  <div class="d-none" id="templates">
+    <div class="col-sm-12 col-md-4 petCard">
+      <div class="card my-5" style="cursor: pointer;" id="petID-1">
+        <img src="https://polyglot-academy-pub.nyc3.digitaloceanspaces.com/pet-pals/dog-biggie.jpg" class="card-img-top" alt="Biggie">
+        <div class="card-body">
+          <button class="btn btn-primary" style="border-radius:50%;float: right;font-weight: bold;position: relative;bottom: 2em;font-size: 2em;width: 2.5em;line-height: 2em;text-align: center;">&#9658;</button>
+          <h5 class="card-title"></h5>
+          <p class="text-muted card-text"><strong></strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
   <script type="text/javascript">
     API_ENDPOINT = 'https://furever-home-backend-purrina-apps.apps.core-ocp.kemo.labs'
@@ -133,7 +148,28 @@
       jQuery(document).ready(function(e) {
         jQuery.ajax(API_ENDPOINT + '/pets', {
           success: function (data, status, xhr) {
-            console.log(data);
+            jsonO = JSON.parse(data.pets);
+            jsonI = jsonO[0]
+            for(var i = 0; i < jsonI.length; i++) {
+              var obj = jsonI[i];
+              rowID = obj[0];
+              name = obj[1];
+              petType = obj[2];
+              city = obj[3];
+              locale = obj[4];
+              image_url = obj[5];
+              created_at = obj[6];
+              adopted_at = obj[7];
+              adopted_by = obj[8];
+
+              template = jQuery("#templates .petCard").clone();
+              template.find('.card').attr('id', 'petID-' + rowID);
+              template.find('img').attr('alt', name);
+              template.find('img').attr('src', image_url);
+              template.find('.card-title').text(name);
+              template.find('.card-text strong').text(city + ", " + locale);
+              jQuery("#itemHolder").append(template);
+            }
           }
         });
       });
@@ -151,11 +187,14 @@
         // Submit to microservice
         jQuery.ajax(API_ENDPOINT + '/pets', {
           success: function (data, status, xhr) {
-            jQuery('p').append(data);
+            jQuery('#exampleModal').modal('hide');
+            jQuery('#exampleModalSuccess').modal('show');
+          },
+          error: function (data, status, xhr) {
+            jQuery('#exampleModal').modal('hide');
+            jQuery('#exampleModalFailed').modal('show');
           }
         });
-        // if unsuccessful
-        jQuery('#exampleModalFailed').modal('show');
       });
     </script>
   </body>
