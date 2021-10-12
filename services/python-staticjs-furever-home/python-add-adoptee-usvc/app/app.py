@@ -2,10 +2,8 @@ import json
 import sys
 import random
 import os
-import decouple
 import logging
 from time import sleep
-from decouple import config
 from kafka import KafkaProducer
 
 ##############################################################################

@@ -1,9 +1,9 @@
 FROM registry.access.redhat.com/ubi8/python-36
 
-WORKDIR "/opt/app-root/src"
+WORKDIR /opt/app-root/src
 
-COPY ./app .
+COPY ./app/* /opt/app-root/src/
 
 RUN pip3 install -r requirements.txt
 
-CMD "python3 /opt/app-root/src/app.py"
+CMD bash -c "python /opt/app-root/src/app.py"

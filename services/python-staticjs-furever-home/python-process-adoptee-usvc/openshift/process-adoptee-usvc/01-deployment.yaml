@@ -22,7 +22,7 @@ spec:
         image: quay.io/kenmoini/furever-home-process-adoptee-usvc:latest
         env:
           - name: CYCLE_SECONDS
-            value: 30
+            value: "30"
           - name: KAFKA_CLUSTER_ENDPOINT
             value: 'pet-cluster-kafka-bootstrap:9092'
           - name: KAFKA_TOPIC
