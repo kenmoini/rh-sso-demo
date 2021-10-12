@@ -18,3 +18,29 @@ updates:
     directory: "/services/go-nodejs-pet-id/go-usvc/"
     schedule:
       interval: "daily"
+
+  # Maintain dependencies for Composer
+  - package-ecosystem: "composer"
+    directory: "/services/php-furever-safe/furever-safe-app"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "pip"
+    directory: "/services/python-staticjs-furever-home/python-backend/app"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "pip"
+    directory: "/services/python-staticjs-furever-home/python-add-adoptee-usvc/app"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "pip"
+    directory: "/services/python-staticjs-furever-home/python-process-adoptee-usvc/app"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/services/python-staticjs-furever-home/static-frontend/app"
+    schedule:
+      interval: "daily"
