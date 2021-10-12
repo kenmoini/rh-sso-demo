@@ -47,14 +47,16 @@ until oc rollout status dc/apicast-production -n ${NS_3SCALE}; do sleep 10; done
 sleep 10
 
 ## The Master URL
+until [ $(oc get routes -n ${NS_3SCALE} --selector='zync.3scale.net/route-to=system-master' -o=json | jq -r '.items | length') -eq 1 ]; do sleep 10; done
 THRSCALE_MASTER_URL=$(oc get routes -n ${NS_3SCALE} --selector='zync.3scale.net/route-to=system-master' -o=jsonpath='{.items[0].spec.host}')
 
-## The Admin Credentials
+## The Admin URL
+until [ $(oc get routes -n ${NS_3SCALE} --selector='zync.3scale.net/route-to=system-provider' -o=json | jq -r '.items | length') -eq 1 ]; do sleep 10; done
+THRSCALE_ADMIN_URL=$(oc get routes -n ${NS_3SCALE} --selector='zync.3scale.net/route-to=system-provider' -o=jsonpath='{.items[0].spec.host}')
+
+## The Master Credentials
 THRSCALE_MASTER_USER=$(oc get secret -n ${NS_3SCALE} system-seed -o json | jq -r .data.MASTER_USER | base64 -d)
 THRSCALE_MASTER_PASS=$(oc get secret -n ${NS_3SCALE} system-seed -o json | jq -r .data.MASTER_PASSWORD | base64 -d)
-
-## The Admin URL
-THRSCALE_ADMIN_URL=$(oc get routes -n ${NS_3SCALE} --selector='zync.3scale.net/route-to=system-provider' -o=jsonpath='{.items[0].spec.host}')
 
 ## The Admin Credentials
 THRSCALE_ADMIN_USER=$(oc get secret -n ${NS_3SCALE} system-seed -o json | jq -r .data.ADMIN_USER | base64 -d)

@@ -66,7 +66,8 @@ def insertIntoDatabase(petInfo):
 ##############################################################################
 while SECONDS_WAIT != 0: #This allows the container to keep running but not send any pet if parameter is set to 0
     for msg in consumer:
-        print (msg)
+        record = msg.values['Records'][0]
+        print (record)
 
     sleep(SECONDS_WAIT)
 

@@ -34,7 +34,6 @@ spec:
               secretKeyRef:
                 key: database-user
                 name: petadoption-db
-            value: petadoption
           - name: DB_PASS
             valueFrom:
               secretKeyRef:
