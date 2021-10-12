@@ -39,5 +39,5 @@ spec:
           configMap:
             name: furever-home-frontend-js-overrides
             items:
-              - key: "overrides"
+              - key: "overrides.js"
                 path: "overrides.js"

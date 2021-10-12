@@ -40,8 +40,14 @@ class Pets(Resource):
         pets = []
         myresult = mycursor.fetchall()
         for x in myresult:
-          pets.append(myresult)
-        return make_response(jsonify({'pets': json.dumps(pets, indent=4, sort_keys=True, default=str)}), 200)
+            pets.append(myresult)
+
+        response = jsonify({'pets': json.dumps(pets, indent=4, sort_keys=True, default=str)})
+
+        # Enable Access-Control-Allow-Origin
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
+        #return make_response(jsonify({'pets': json.dumps(pets, indent=4, sort_keys=True, default=str)}), 200)
 
 class Pet(Resource):
     def get(self):
@@ -54,7 +60,7 @@ class Pet(Resource):
         pets = []
         myresult = mycursor.fetchall()
         for x in myresult:
-          pets.append(myresult)
+            pets.append(myresult)
         return make_response(jsonify({'pet': json.dumps(pets, indent=4, sort_keys=True, default=str)}), 200)
 
 class Submissions(Resource):
@@ -68,7 +74,7 @@ class Submissions(Resource):
         pets = []
         myresult = mycursor.fetchall()
         for x in myresult:
-          pets.append(myresult)
+            pets.append(myresult)
         return make_response(jsonify({'submissions': json.dumps(pets, indent=4, sort_keys=True, default=str)}), 200 )
 
 

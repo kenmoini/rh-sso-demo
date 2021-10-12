@@ -8,5 +8,5 @@ metadata:
     app.kubernetes.io/part-of: furever-home-frontend
     component: configmap
 data:
-  override.js: |
-    API_ENDPOINT=https://furever-home-backend-purrina-apps.apps.core-ocp.kemo.labs
+  overrides.js: |
+    var API_ENDPOINT = "https://furever-home-backend-purrina-apps.apps.core-ocp.kemo.labs"

@@ -39,10 +39,7 @@ spec:
                 key: database-password
                 name: petadoption-db
           - name: DB_HOST
-            valueFrom:
-              secretKeyRef:
-                key: database-name
-                name: petadoption-db
+            value: petadoption-db
           - name: DB_DB
             valueFrom:
               secretKeyRef:
