@@ -22,6 +22,7 @@ spec:
     spec:
       containers:
       - name: furever-home-process-adoptee-usvc
+        imagePullPolicy: Always
         image: quay.io/kenmoini/furever-home-process-adoptee-usvc:latest
         env:
           - name: CYCLE_SECONDS

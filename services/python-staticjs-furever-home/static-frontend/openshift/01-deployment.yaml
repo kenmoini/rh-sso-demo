@@ -22,6 +22,7 @@ spec:
     spec:
       containers:
       - name: furever-home-frontend
+        imagePullPolicy: Always
         image: quay.io/kenmoini/furever-home-frontend:latest
         ports:
           - containerPort: 8080
@@ -29,3 +30,14 @@ spec:
         env:
           - name: API_ENDPOINT
             value: furever-home-backend
+        volumeMounts:
+          - name: overrides
+            mountPath: "/var/www/html/assets/js/container/"
+            readOnly: true
+      volumes:
+        - name: overrides
+          configMap:
+            name: furever-home-frontend-js-overrides
+            items:
+              - key: "overrides"
+                path: "overrides.js"

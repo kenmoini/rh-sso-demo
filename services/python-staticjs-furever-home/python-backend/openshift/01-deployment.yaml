@@ -22,6 +22,7 @@ spec:
     spec:
       containers:
       - name: furever-home-backend
+        imagePullPolicy: Always
         image: quay.io/kenmoini/furever-home-backend:latest
         ports:
           - containerPort: 8080
