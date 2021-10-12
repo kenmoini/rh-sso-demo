@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: furever-home-add-adoptee-usvc
+  annotations:
+    app.openshift.io/connects-to: '[{"apiVersion":"apps/v1","kind":"StatefulSet","name":"pet-cluster-kafka"}]'
   labels:
     app: furever-home-add-adoptee-usvc
     app.kubernetes.io/name: furever-home-add-adoptee-usvc

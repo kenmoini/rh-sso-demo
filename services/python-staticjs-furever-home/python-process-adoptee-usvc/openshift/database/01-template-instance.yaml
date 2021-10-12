@@ -48,6 +48,11 @@ spec:
       - apiVersion: v1
         kind: Secret
         metadata:
+          labels:
+            app: furever-home-process-adoptee-usvc
+            app.kubernetes.io/name: '${DATABASE_SERVICE_NAME}'
+            app.kubernetes.io/part-of: furever-home-process-adoptee-usvc
+            component: secret
           annotations:
             template.openshift.io/expose-database_name: '{.data[''database-name'']}'
             template.openshift.io/expose-password: '{.data[''database-password'']}'
@@ -65,6 +70,11 @@ spec:
           annotations:
             template.openshift.io/expose-uri: 'mysql://{.spec.clusterIP}:{.spec.ports[?(.name=="mariadb")].port}'
           name: '${DATABASE_SERVICE_NAME}'
+          labels:
+            app: furever-home-process-adoptee-usvc
+            app.kubernetes.io/name: '${DATABASE_SERVICE_NAME}'
+            app.kubernetes.io/part-of: furever-home-process-adoptee-usvc
+            component: service
         spec:
           ports:
             - name: mariadb
@@ -75,6 +85,11 @@ spec:
         kind: PersistentVolumeClaim
         metadata:
           name: '${DATABASE_SERVICE_NAME}'
+          labels:
+            app: furever-home-process-adoptee-usvc
+            app.kubernetes.io/name: '${DATABASE_SERVICE_NAME}'
+            app.kubernetes.io/part-of: furever-home-process-adoptee-usvc
+            component: pvc
         spec:
           accessModes:
             - ReadWriteOnce
@@ -87,6 +102,11 @@ spec:
           annotations:
             template.alpha.openshift.io/wait-for-ready: 'true'
           name: '${DATABASE_SERVICE_NAME}'
+          labels:
+            app: furever-home-process-adoptee-usvc
+            app.kubernetes.io/name: '${DATABASE_SERVICE_NAME}'
+            app.kubernetes.io/part-of: furever-home-process-adoptee-usvc
+            component: deployment
         spec:
           replicas: 1
           selector:
