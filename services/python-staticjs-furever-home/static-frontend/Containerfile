@@ -6,7 +6,8 @@ COPY app/ /var/www/html/
 
 RUN npm i \
  && npm run css-compile \
- && npx webpack
+ && npx webpack \
+ && chmod -R 777 .
 
 USER 1001
 
