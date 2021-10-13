@@ -77,7 +77,7 @@ class Submissions(Resource):
         if (userID != None):
             mydb = mysql.connector.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_DB)
             mycursor = mydb.cursor()
-            mycursor.execute("SELECT * FROM adoption_submissions WHERE user_id="+str(userID)+" LIMIT 50")
+            mycursor.execute("SELECT * FROM adoption_submissions WHERE user_id='"+str(userID)+"' LIMIT 50")
 
             myresult = mycursor.fetchall()
             for x in myresult:
