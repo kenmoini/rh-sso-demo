@@ -28,6 +28,12 @@ type ApplicationYaml struct {
 	Server          Server          `yaml:"server,omitempty"`
 	KafkaConnection KafkaConnection `yaml:"kafka_connection,omitempty"`
 	SQLConnection   SQLConnection   `yaml:"db_connection,omitempty"`
+	GeneralConfig   GeneralConfig   `yaml:"config,omitempty"`
+}
+
+// GeneralConfig
+type GeneralConfig struct {
+	ThreeScaleHeaderSecret    string `json:"three_scale_header_secret,omit_empty"`
 }
 
 // Server configures the HTTP server
@@ -78,13 +84,15 @@ type SQLConnection struct {
 // Profile provides the structure for general people profile information
 type Profile struct {
 	Id           int    `json:"id"`
-	FirstName    string `json:"first_name"`
-	LastName     string `json:"last_name"`
-	EmailAddress string `json:"email_address"`
+	UserID       string `json:"user_id"`
+	AvatarURL    string `json:"avatar_url,omit_empty"`
+	FirstName    string `json:"firstname,omit_empty"`
+	LastName     string `json:"lastname,omit_empty"`
+	EmailAddress string `json:"email"`
 	City         string `json:"city,omit_empty"`
 	State        string `json:"state,omit_empty"`
 	Country      string `json:"country,omit_empty"`
-	PhoneNumber  string `json:"phone_number,omit_empty"`
+	PhoneNumber  string `json:"phone,omit_empty"`
 }
 
 // JSONResponse
@@ -108,4 +116,11 @@ type Pet struct {
 	Breed     string `json:"breed,omitempty"`
 	Color     string `json:"color,omitempty"`
 	Birthday  string `json:"birthday,omitempty"`
+}
+
+// PetProfile houses a collection of pet/profile ID pairings
+type PetProfile struct {
+	Id         int `json:"id"`
+	PetID      int `json:"pet_id"`
+	ProfileID  int `json:"profile_id"`
 }

@@ -45,6 +45,7 @@ func NewRouter(basePath string) *http.ServeMux {
 			DefaultEmptyErrorResponse(w, r)
 		}
 	})
+	//router.HandleFunc(basePath+"/profile", HandleProfile).Methods("GET", "POST", "OPTIONS")
 
 	// /pets handles the data for pet profiles
 	router.HandleFunc(basePath+"/pets", func(w http.ResponseWriter, r *http.Request) {
@@ -67,6 +68,16 @@ func DefaultEmptyErrorResponse(w http.ResponseWriter, r *http.Request) {
 	DefResp := &JSONResponse{
 		Entities: []Entity{},
 		Errors:   []string{"invalid-request"},
+	}
+	json, _ := json.Marshal(DefResp)
+	fmt.Fprintf(w, string(json))
+}
+
+// DefaultEmptyResponse
+func DefaultEmptyResponse(w http.ResponseWriter, r *http.Request) {
+	DefResp := &JSONResponse{
+		Entities: []Entity{},
+		Errors:   []string{},
 	}
 	json, _ := json.Marshal(DefResp)
 	fmt.Fprintf(w, string(json))

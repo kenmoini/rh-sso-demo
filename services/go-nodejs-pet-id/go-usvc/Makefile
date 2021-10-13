@@ -11,4 +11,4 @@ build-darwin-amd64:
 	env GOOS=darwin GOARCH=amd64 go build -v -o dist/pet-id-darwin-amd64
 
 run:
-	go run
+	go run main.go

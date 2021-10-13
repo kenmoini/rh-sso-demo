@@ -5,7 +5,7 @@ metadata:
   labels:
     app: pet-id-backend
     app.kubernetes.io/name: pet-id-backend
-    app.kubernetes.io/part-of: pet-id-backend
+    app.kubernetes.io/part-of: pet-id
     component: deployment
 spec:
   replicas: 1

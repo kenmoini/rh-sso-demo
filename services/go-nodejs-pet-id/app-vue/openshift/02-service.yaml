@@ -6,7 +6,8 @@ metadata:
     description: The PetID Vue SPA web server's http port.
   labels:
     app: pet-id-frontend
-    app.kubernetes.io/part-of: pet-id-frontend
+    app.kubernetes.io/name: pet-id-frontend
+    app.kubernetes.io/part-of: pet-id
     component: pet-id-frontend-service
   name: pet-id-frontend
 spec:

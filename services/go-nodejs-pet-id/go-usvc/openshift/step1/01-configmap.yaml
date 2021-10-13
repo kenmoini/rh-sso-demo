@@ -4,8 +4,8 @@ metadata:
   name: pet-id-backend-env
   labels:
     app: pet-id-backend
-    app.kubernetes.io/name: pet-id-backend
-    app.kubernetes.io/part-of: pet-id-backend
+    app.kubernetes.io/name: pet-id-backend-env
+    app.kubernetes.io/part-of: pet-id
     component: configmap
 data:
   .env: |
@@ -21,10 +21,10 @@ data:
           idle: 5
 
       db_connection:
-        server: localhost
+        server: petid-db
         port: 3306
-        username: petiddbu
-        password: securePassword
+        username: petid
+        password: petid
         database: petid
 
       config:

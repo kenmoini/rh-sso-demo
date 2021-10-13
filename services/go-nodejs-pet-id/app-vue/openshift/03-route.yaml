@@ -5,7 +5,8 @@ metadata:
   name: pet-id-frontend
   labels:
     app: pet-id-frontend
-    app.kubernetes.io/part-of: pet-id-frontend
+    app.kubernetes.io/name: pet-id-frontend
+    app.kubernetes.io/part-of: pet-id
     component: pet-id-frontend-route
 spec:
   to:

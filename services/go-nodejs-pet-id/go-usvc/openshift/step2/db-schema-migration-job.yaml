@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dbpopulate-petid-db
+  labels:
+    app: pet-id-job
+    app.kubernetes.io/name: dbpopulate-petid-db
+    app.kubernetes.io/part-of: pet-id
+    component: dbpopulate-job
+  annotations:
+    app.openshift.io/connects-to: >-
+      [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"petid-db"}]
+spec:
+  parallelism: 1
+  completions: 1
+  activeDeadlineSeconds: 1800
+  backoffLimit: 6
+  template:
+    metadata:
+      name: dbpopulate-petid-db
+    spec:
+      containers:
+      - name: dbpopulate-petid-db
+        image: mariadb
+        command:
+        - mysql
+        - "-h"
+        - petid-db
+        - "-u"
+        - root
+        - "--password=petid"
+        - petid
+        - "-e"
+        - "CREATE TABLE `profiles` (`id` int(9) unsigned NOT NULL AUTO_INCREMENT, `user_id` text DEFAULT NULL, `avatar_url` text DEFAULT NULL, `firstname` text NOT NULL, `lastname` text NOT NULL, `email` text NOT NULL, `city` text DEFAULT NULL, `state` text DEFAULT NULL, `country` text DEFAULT NULL, `phone` text DEFAULT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+      restartPolicy: OnFailure

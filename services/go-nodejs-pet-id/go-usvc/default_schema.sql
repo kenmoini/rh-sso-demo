@@ -17,6 +17,7 @@ CREATE TABLE `pet_profile` (
 CREATE TABLE `pets` (
   `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
   `owner_profile_id` int(9) unsigned NOT NULL,
+  `adoptee_id` int(9) unsigned NOT NULL,
   `name` text NOT NULL,
   `nickname` text DEFAULT NULL,
   `type` text NOT NULL,
@@ -32,6 +33,8 @@ CREATE TABLE `pets` (
 
 CREATE TABLE `profiles` (
   `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` text DEFAULT NULL,
+  `avatar_url` text DEFAULT NULL,
   `firstname` text NOT NULL,
   `lastname` text NOT NULL,
   `email` text NOT NULL,
@@ -39,6 +42,5 @@ CREATE TABLE `profiles` (
   `state` text DEFAULT NULL,
   `country` text DEFAULT NULL,
   `phone` text DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`) USING HASH
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
