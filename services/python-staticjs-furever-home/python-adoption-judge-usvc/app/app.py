@@ -58,7 +58,7 @@ class Adopt(Resource):
 
             cursor = cnx.cursor()
             query = "INSERT INTO adoption_submissions(user_id, pet_adoptee_id, status, updated_at, pet_name, pet_city, pet_locale) VALUES (%s, %s, %s, current_timestamp(), %s, %s, %s);"
-            values = (args['user_id'], args['pet_id'], decision, myresult.name, myresult.city, myresult.locale)
+            values = (args['user_id'], args['pet_id'], decision, myresult[1], myresult[3], myresult[4])
             cursor.execute(query, values)
             cnx.commit()
             cursor.close()
