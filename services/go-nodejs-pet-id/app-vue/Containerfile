@@ -5,7 +5,7 @@ USER root
 #WORKDIR "/opt/app-root/src"
 WORKDIR "/var/www/html"
 
-COPY . .
+COPY . /var/www/html
 
 RUN npm install \
  && npm run build \
