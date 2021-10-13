@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: furever-home-backend
+  name: backend
   labels:
-    app: furever-home-backend
-    app.kubernetes.io/name: furever-home-backend
-    app.kubernetes.io/part-of: furever-home-backend
+    app: backend
+    app.kubernetes.io/name: backend
+    app.kubernetes.io/part-of: furever-home
     component: deployment
   annotations:
     app.openshift.io/connects-to: >-
@@ -14,14 +14,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: furever-home-backend
+      app: backend
   template:
     metadata:
       labels:
-        app: furever-home-backend
+        app: backend
     spec:
       containers:
-      - name: furever-home-backend
+      - name: backend
         imagePullPolicy: Always
         image: quay.io/kenmoini/furever-home-backend:latest
         ports:

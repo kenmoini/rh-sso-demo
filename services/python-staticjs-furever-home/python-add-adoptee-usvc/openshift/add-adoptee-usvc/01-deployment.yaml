@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: furever-home-add-adoptee-usvc
+  name: add-adoptee-usvc
   annotations:
     app.openshift.io/connects-to: '[{"apiVersion":"apps/v1","kind":"StatefulSet","name":"pet-cluster-kafka"}]'
   labels:
-    app: furever-home-add-adoptee-usvc
-    app.kubernetes.io/name: furever-home-add-adoptee-usvc
-    app.kubernetes.io/part-of: furever-home-add-adoptee-usvc
+    app: add-adoptee-usvc
+    app.kubernetes.io/name: add-adoptee-usvc
+    app.kubernetes.io/part-of: furever-home
     component: deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: furever-home-add-adoptee-usvc
+      app: add-adoptee-usvc
   template:
     metadata:
       labels:
-        app: furever-home-add-adoptee-usvc
+        app: add-adoptee-usvc
     spec:
       containers:
-      - name: furever-home-add-adoptee-usvc
+      - name: add-adoptee-usvc
         imagePullPolicy: Always
         image: quay.io/kenmoini/furever-home-add-adoptee-usvc:latest
         env:

@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: furever-home-frontend
+  name: frontend
   labels:
-    app: furever-home-frontend
-    app.kubernetes.io/name: furever-home-frontend
-    app.kubernetes.io/part-of: furever-home-frontend
+    app: furever-home
+    app.kubernetes.io/name: frontend
+    app.kubernetes.io/part-of: furever-home
     component: deployment
   annotations:
     app.openshift.io/connects-to: >-
-      [{"apiVersion":"apps/v1","kind":"Deployment","name":"furever-home-backend"}]
+      [{"apiVersion":"apps/v1","kind":"Deployment","name":"backend"}]
 spec:
   replicas: 1
   selector:
