@@ -4,9 +4,9 @@ import VueLogger from 'vuejs-logger';
 import * as Keycloak from 'keycloak-js';
 
 // Constant definitions
-const KeycloakServer = process.env.KEYCLOAK_SERVER || 'http://127.0.0.1:8888/auth';
-const KeycloakRealm = process.env.KEYCLOAK_REALM || 'keycloak-demo';
-const KeycloakClientID = process.env.KEYCLOAK_CLIENT_ID || 'app-vue';
+const KeycloakServer = process.env.KEYCLOAK_SERVER || 'https://rh-sso-a-rh-sso-demo.apps.core-ocp.kemo.labs/auth/';
+const KeycloakRealm = process.env.KEYCLOAK_REALM || 'petcorp';
+const KeycloakClientID = process.env.KEYCLOAK_CLIENT_ID || 'separate-client';
 
 Vue.use(VueLogger);
 
