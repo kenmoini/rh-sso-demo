@@ -9,7 +9,7 @@ metadata:
     component: deployment
   annotations:
     app.openshift.io/connects-to: >-
-      [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"petadoption-db"}]
+      [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"petadoption-db"},{"apiVersion":"apps/v1","kind":"StatefulSet","name":"pet-cluster-kafka"}]
 spec:
   replicas: 1
   selector:

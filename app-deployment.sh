@@ -1,6 +1,7 @@
 #!/bin/bash
 
-NS_APPS="a-rh-sso-demo"
+#NS_APPS="a-rh-sso-demo"
+NS_APPS="a-sso-app-demo"
 
 function logHeader() {
   echo -e "\n======================================================================"

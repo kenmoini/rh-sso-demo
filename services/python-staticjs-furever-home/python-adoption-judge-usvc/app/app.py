@@ -53,6 +53,7 @@ class Adopt(Resource):
             mycursor = cnx.cursor()
             mycursor.execute("SELECT * FROM pet_adoptees WHERE id="+str(args['pet_id'])+"")
             myresult = mycursor.fetchone()
+            print(myresult)
             mycursor.close()
 
             cursor = cnx.cursor()

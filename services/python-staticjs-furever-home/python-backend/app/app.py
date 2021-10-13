@@ -70,17 +70,18 @@ class Pet(Resource):
 class Submissions(Resource):
     def get(self):
 
+        pets = []
         query_parameters = request.args
         userID = query_parameters.get('user_id')
 
-        mydb = mysql.connector.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_DB)
-        mycursor = mydb.cursor()
-        mycursor.execute("SELECT * FROM adoption_submissions WHERE user_id="+str(userID)+" LIMIT 50")
+        if (userID != None):
+            mydb = mysql.connector.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_DB)
+            mycursor = mydb.cursor()
+            mycursor.execute("SELECT * FROM adoption_submissions WHERE user_id="+str(userID)+" LIMIT 50")
 
-        pets = []
-        myresult = mycursor.fetchall()
-        for x in myresult:
-            pets.append(myresult)
+            myresult = mycursor.fetchall()
+            for x in myresult:
+                pets.append(myresult)
 
         response = jsonify(submissions=json.dumps(pets, sort_keys=True, default=str))
 
