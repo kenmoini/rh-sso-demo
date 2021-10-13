@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: backend
   labels:
-    app: backend
+    app: furever-home-backend
     app.kubernetes.io/name: backend
     app.kubernetes.io/part-of: furever-home
     component: deployment
@@ -14,11 +14,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: furever-home-backend
   template:
     metadata:
       labels:
-        app: backend
+        app: furever-home-backend
     spec:
       containers:
       - name: backend

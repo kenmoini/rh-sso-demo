@@ -58,6 +58,7 @@ class Adopt(Resource):
 
             cursor = cnx.cursor()
             query = "INSERT INTO adoption_submissions(user_id, pet_adoptee_id, status, updated_at, pet_name, pet_city, pet_locale) VALUES (%s, %s, %s, current_timestamp(), %s, %s, %s);"
+            print(query)
             values = (args['user_id'], args['pet_id'], decision, myresult[1], myresult[3], myresult[4])
             cursor.execute(query, values)
             cnx.commit()
@@ -65,7 +66,7 @@ class Adopt(Resource):
             
             if (decision == "approved"):
                 cursor = cnx.cursor()
-                query = "UPDATE pet_adoptees SET adopted_at = current_timestamp(), adopted_by = '%s' WHERE id = %s;"
+                query = "UPDATE pet_adoptees SET adopted_at = current_timestamp(), adopted_by = %s WHERE id = %s;"
                 values = (args['user_id'], args['pet_id'])
                 cursor.execute(query, values)
                 cnx.commit()

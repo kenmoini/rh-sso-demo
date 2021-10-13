@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: frontend
   labels:
-    app: furever-home
+    app: furever-home-frontend
     app.kubernetes.io/name: frontend
     app.kubernetes.io/part-of: furever-home
     component: deployment
@@ -21,7 +21,7 @@ spec:
         app: furever-home-frontend
     spec:
       containers:
-      - name: furever-home-frontend
+      - name: frontend
         imagePullPolicy: Always
         image: quay.io/kenmoini/furever-home-frontend:latest
         ports:
@@ -29,7 +29,7 @@ spec:
             protocol: TCP
         env:
           - name: API_ENDPOINT
-            value: furever-home-backend
+            value: backend
         volumeMounts:
           - name: overrides
             mountPath: "/var/www/html/assets/js/container/"
