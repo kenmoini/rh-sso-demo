@@ -6,7 +6,7 @@ metadata:
     app: pet-id-job
     app.kubernetes.io/name: dbpopulate-petid-db
     app.kubernetes.io/part-of: pet-id
-    component: dbpopulate-job
+    component: petid-dbpopulate-job
   annotations:
     app.openshift.io/connects-to: >-
       [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"petid-db"}]

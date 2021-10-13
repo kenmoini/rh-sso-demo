@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: pet-id-backend-env
+  name: pet-id-backend-config-yml
   labels:
     app: pet-id-backend
     app.kubernetes.io/name: pet-id-backend-env
     app.kubernetes.io/part-of: pet-id
     component: configmap
 data:
-  .env: |
+  config.yml: |
     app:
       server:
         host: 0.0.0.0

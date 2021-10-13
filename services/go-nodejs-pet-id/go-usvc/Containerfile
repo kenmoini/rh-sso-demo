@@ -20,4 +20,4 @@ COPY --from=builder /workspace/dist/pet-id .
 
 USER 65532:65532
 
-ENTRYPOINT ["/pet-id"]
+ENTRYPOINT ["/pet-id -config /opt/config.yml"]

@@ -14,6 +14,17 @@ logHeader "Deploying Applications..."
 oc new-project ${NS_APPS} > /dev/null 2>&1
 
 ######## Deploy PetID Application
+## Backend
+logHeader "Deploying PetID - Backend..."
+oc apply -n ${NS_APPS} -f services/go-nodejs-pet-id/go-usvc/openshift/step1/
+until oc rollout status -n ${NS_APPS} dc/petid-db; do sleep 10; done
+oc apply -n ${NS_APPS} -f services/go-nodejs-pet-id/go-usvc/openshift/step2/
+echo "Waiting for DB Population Job to finish..."
+until [ $(oc get jobs -n ${NS_APPS} --selector='component==petid-dbpopulate-job' -o=json | jq -r '.items[0].status.succeeded') -eq 1 ]; do sleep 10; done
+
+## Frontend
+logHeader "Deploying PetID - Frontend..."
+oc apply -n ${NS_APPS} -f services/go-nodejs-pet-id/app-view/openshift/
 
 ######## Deploy Furever Safe
 

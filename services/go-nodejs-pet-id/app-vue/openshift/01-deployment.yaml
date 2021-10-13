@@ -34,3 +34,5 @@ spec:
             value: petcorp
           - name: KEYCLOAK_CLIENT_ID
             value: separate-client
+          - name: PET_ID_SERVER_ENDPOINT
+            value: https://pet-id-backend-a-sso-app-demo.apps.core-ocp.kemo.labs/auth/
