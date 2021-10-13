@@ -16,17 +16,23 @@ data:
     console.log('hello from the functions file!');
   keycloak-shared.js: |
     function initKeycloak() {
-      var keycloak = new Keycloak(window.location.origin + "/assets/js/container/keycloak.json");
-      keycloak.init().then(function(authenticated) {
-        console.log(authenticated);
+      const KeycloakServer = "https://rh-sso-a-rh-sso-demo.apps.core-ocp.kemo.labs/auth/";
+      const KeycloakRealm = "petcorp";
+      const KeycloakClientID = "separate-client";
+      let initOptions = {
+        url: KeycloakServer, realm: KeycloakRealm, clientId: KeycloakClientID, onLoad: 'login-required'
+      }
+      var keycloak = new Keycloak(initOptions);
+      keycloak.init({ onLoad: initOptions.onLoad }).then(function(authenticated) {
         if (authenticated) {
-          username = keycloak.subject;
+          username = keycloak.idTokenParsed.preferred_username;
           token = keycloak.token;
+          USER_ID = keycloak.subject;
           jQuery(".text-username").text(username);
+          loadSubmissions();
         }
-        alert(authenticated ? 'authenticated' : 'not authenticated');
       }).catch(function(e) {
-        alert('failed to initialize');
+        console.log('failed to initialize');
         console.log(e);
       });
     }

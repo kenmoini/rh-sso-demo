@@ -15,5 +15,6 @@ spec:
   port:
     targetPort: pet-id-frontend
   tls:
-    termination: reencrypt
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
   wildcardPolicy: None
