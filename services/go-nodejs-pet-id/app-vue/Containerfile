@@ -8,7 +8,11 @@ WORKDIR "/var/www/html"
 COPY . .
 
 RUN npm install \
- && npm run build
+ && npm run build \
+ && chown -R 1001:1001 . \
+ && chmod -R 777 .
+
+USER 1001
 
 #FROM registry.access.redhat.com/ubi8/httpd-24:latest
 #
