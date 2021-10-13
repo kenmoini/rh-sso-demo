@@ -66,7 +66,7 @@
     <script type="text/javascript" src="assets/js/container/functions.js"></script>
     <script type="text/javascript">
       jQuery(document).ready(function(e) {
-        jQuery.ajax(API_ENDPOINT + '/submissions', {
+        jQuery.ajax(API_ENDPOINT + '/submissions?user_id='+USER_ID, {
           success: function (data, status, xhr) {
             jsonO = JSON.parse(data.submissions);
             jsonI = jsonO[0]
