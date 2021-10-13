@@ -45,3 +45,5 @@ spec:
                 path: "functions.js"
               - key: "keycloak-shared.js"
                 path: "keycloak-shared.js"
+              - key: "keycloak.json"
+                path: "keycloak.json"

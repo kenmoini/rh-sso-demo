@@ -27,6 +27,10 @@ logHeader "Deploying RH SSO..."
 oc new-project ${NS_SSO} > /dev/null 2>&1
 oc apply --namespace=${NS_SSO} -f deploy-rh-sso/
 
+RH_SSO_URL=$(oc get route/rh-sso --namespace=${NS_SSO} -o=jsonpath='{.spec.host}')
+RH_SSO_ADMIN_USER=$(oc get secret --namespace=${NS_SSO} credential-rh-sso -o json | jq -r .data.ADMIN_USERNAME | base64 -d)
+RH_SSO_ADMIN_PASS=$(oc get secret --namespace=${NS_SSO} credential-rh-sso -o json | jq -r .data.ADMIN_PASSWORD | base64 -d)
+
 ######## Deploy RH 3Scale
 ## Create a namespace
 logHeader "Deploying 3Scale..."
@@ -73,4 +77,7 @@ echo -e "3Scale Admin Username: ${THRSCALE_ADMIN_USER}"
 echo -e "3Scale Admin Password: ${THRSCALE_ADMIN_PASS}"
 
 echo -e "\n===== Red Hat SSO Information\n"
+echo -e "SSO URL: https://${RH_SSO_URL}"
+echo -e "SSO Admin Username: ${RH_SSO_ADMIN_USER}"
+echo -e "SSO Admin Password: ${RH_SSO_ADMIN_PASS}"
 echo -e "\n===== Application Information\n"

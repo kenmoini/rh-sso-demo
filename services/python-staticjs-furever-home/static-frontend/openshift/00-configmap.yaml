@@ -16,19 +16,26 @@ data:
     console.log('hello from the functions file!');
   keycloak-shared.js: |
     function initKeycloak() {
-      var keycloak = new Keycloak({
-        url: '',
-        realm: '',
-        clientId: ''
-      });
+      var keycloak = new Keycloak(window.location.origin + "/assets/js/container/keycloak.json");
       keycloak.init().then(function(authenticated) {
+        console.log(authenticated);
         if (authenticated) {
           username = keycloak.subject;
           token = keycloak.token;
           jQuery(".text-username").text(username);
         }
         alert(authenticated ? 'authenticated' : 'not authenticated');
-      }).catch(function() {
+      }).catch(function(e) {
         alert('failed to initialize');
+        console.log(e);
       });
+    }
+  keycloak.json: |
+    {
+      "realm": "petcorp",
+      "auth-server-url": "https://rh-sso-a-rh-sso-demo.apps.core-ocp.kemo.labs/auth/",
+      "ssl-required": "none",
+      "resource": "separate-client",
+      "public-client": true,
+      "confidential-port": 0
     }

@@ -4,14 +4,87 @@ This repo houses a number of quickstarts, apps, and services to showcase the cap
 
 Things covered:
 
-- Deploying RH SSO to OpenShift.
-- Creating a Realm, configuring it, testing with a basic Client.
-- Modifying the deployment to use custom themes with a custom baked image.
-- Deploying a number of services to use as Clients.
+- Deploying the following services to OpenShift:
+  - Red Hat Single Sign On
+  - Red Hat 3Scale API Gateway (maybe)
+  - Red Hat AMQ Streams
+  - Kong Enterprise API Gateway (maybe)
+- A series of applications to simulate a pet adoption and insurance platform with centralized identity.
+
+- Configuration of RH SSO:
+  - Creating a Realm, configuring it, creating Clients.
+  - Modifying the deployment to use custom themes with a custom baked image.
+
+- Configuration of RH 3Scale
 
 ## Deployment
 
-The deployment target for this demo is Red Hat OpenShift (tested on 4.8) - you could run this on other Kubernetes clusters as well with little modification.
+The deployment target for this demo is Red Hat OpenShift (tested on 4.8) - you could run this on other OLM-enabled Kubernetes clusters as well with little modification.
+
+### 1. Red Hat Single Sign On
+
+The deployment of RH SSO is done via traditional set of manifests such as Services/Routes/StatefulSets/etc instead of via the Operator.  To deploy it to any OpenShift cluster, run the following:
+
+```bash
+# Create a new Project
+oc new-project rh-sso
+
+# Deploy the SSO Service
+oc apply --namespace=rh-sso -f deploy-rh-sso/
+
+# Pull needed info
+RH_SSO_URL=$(oc get route/rh-sso --namespace=rh-sso -o=jsonpath='{.spec.host}')
+RH_SSO_ADMIN_USER=$(oc get secret --namespace=rh-sso credential-rh-sso -o json | jq -r .data.ADMIN_USERNAME | base64 -d)
+RH_SSO_ADMIN_PASS=$(oc get secret --namespace=rh-sso credential-rh-sso -o json | jq -r .data.ADMIN_PASSWORD | base64 -d)
+```
+
+### 2. Red Hat 3Scale
+
+3Scale is deployed via the Operator Framework.  To deploy it to any OpenShift cluster, run the following:
+
+```bash
+# Create a new Project
+oc new-project rh-3scale
+
+# Deploy the SSO Service
+oc apply --namespace=rh-3scale -f deploy-rh-3scale/operator/step1/
+
+## Dashboard URLs
+THRSCALE_MASTER_URL=$(oc get routes --namespace=rh-3scale --selector='zync.3scale.net/route-to=system-master' -o=jsonpath='{.items[0].spec.host}')
+THRSCALE_ADMIN_URL=$(oc get routes --namespace=rh-3scale --selector='zync.3scale.net/route-to=system-provider' -o=jsonpath='{.items[0].spec.host}')
+
+## The Master Credentials
+THRSCALE_MASTER_USER=$(oc get secret --namespace=rh-3scale system-seed -o json | jq -r .data.MASTER_USER | base64 -d)
+THRSCALE_MASTER_PASS=$(oc get secret --namespace=rh-3scale system-seed -o json | jq -r .data.MASTER_PASSWORD | base64 -d)
+
+## The Admin Credentials
+THRSCALE_ADMIN_USER=$(oc get secret --namespace=rh-3scale system-seed -o json | jq -r .data.ADMIN_USER | base64 -d)
+THRSCALE_ADMIN_PASS=$(oc get secret --namespace=rh-3scale system-seed -o json | jq -r .data.ADMIN_PASSWORD | base64 -d)
+```
+
+### 3. Red Hat Serverless
+
+Deploy RH Serverless via the Operator Framework.  To deploy it to any OpenShift cluster, run the following:
+
+```bash
+# Deploy the Operator
+oc apply -f deploy-rh-serverless/step1/
+
+# Wait for the Operator to install
+until oc get customresourcedefinition knativeservings.operator.knative.dev; do sleep 3; done
+
+# Deploy the needed instances
+oc apply -f deploy-rh-serverless/step2/
+```
+
+### 4. Red Hat AMQ Streams (Kafka)
+
+Deploy RH AMQ Streams (Kafka) via the Operator Framework.  To deploy it to any OpenShift cluster, run the following:
+
+```bash
+# Deploy the Operator
+oc apply -f deploy-rh-amq-streams/
+```
 
 ## Documentation
 
@@ -121,9 +194,7 @@ oc apply -f deploy-rh-amq-streams/
 
 #### Create a Demo Realm
 
-Literally create a Realm called `demo`
-
-#### Create a Client for the 3Scale Developer Portal
+Create a Realm called `petcorp`
 
 #### Create a Client for the 3Scale Admin Portal
 
@@ -134,7 +205,7 @@ Create a new Client with the following configuration:
 - **Login Theme:** `<your_choice>`
 - **Access Type:** `confidential`
 
-With the Client created, you can use it and the ID/Secret pair to create the Admin Portal integratino in 3Scale under the Admin Portal > Account Settings > Users > SSO Integrations.  Create the Integration and that will give you the generated callback URLs to provide back to this SSO Client...
+With the Client created, you can use it and the ID/Secret pair to create the Admin Portal integration in 3Scale under the Admin Portal > Account Settings > Users > SSO Integrations.  Create the Integration and that will give you the generated callback URLs to provide back to this SSO Client...
 
 ### 6. Configure 3Scale - OpenID Connect
 

@@ -28,8 +28,8 @@ spec:
           protocol: TCP
         env:
           - name: KEYCLOAK_SERVER
-            value: http://rh-sso:8080/auth
+            value: https://rh-sso-a-rh-sso-demo.apps.core-ocp.kemo.labs/auth/
           - name: KEYCLOAK_REALM
-            value: acme-inc
+            value: petcorp
           - name: KEYCLOAK_CLIENT_ID
-            value: pet-id-frontend
+            value: separate-client
