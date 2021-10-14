@@ -149,6 +149,7 @@
 
     <script type="text/javascript">
       function loadSubmissions() {
+
         jQuery.ajax(API_ENDPOINT + '/pets', {
           success: function (data, status, xhr) {
             jsonO = JSON.parse(data.pets);
