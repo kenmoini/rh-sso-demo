@@ -7,6 +7,9 @@ metadata:
     app.kubernetes.io/name: pet-id-frontend
     app.kubernetes.io/part-of: pet-id
     component: pet-id-frontend-deployment
+  annotations:
+    app.openshift.io/connects-to: >-
+      [{"apiVersion":"apps/v1","kind":"Deployment","name":"pet-id-backend"}]
 spec:
   replicas: 1
   selector:
@@ -35,4 +38,4 @@ spec:
           - name: KEYCLOAK_CLIENT_ID
             value: separate-client
           - name: PET_ID_SERVER_ENDPOINT
-            value: https://pet-id-backend-a-sso-app-demo.apps.core-ocp.kemo.labs/auth/
+            value: https://pet-id-backend-a-sso-app-demo.apps.core-ocp.kemo.labs/app

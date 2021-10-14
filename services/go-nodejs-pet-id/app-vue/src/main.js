@@ -8,7 +8,7 @@ import axios from 'axios';
 const KeycloakServer = process.env.KEYCLOAK_SERVER || 'https://rh-sso-a-rh-sso-demo.apps.core-ocp.kemo.labs/auth/';
 const KeycloakRealm = process.env.KEYCLOAK_REALM || 'petcorp';
 const KeycloakClientID = process.env.KEYCLOAK_CLIENT_ID || 'separate-client';
-const PetIDServerEndpoint = process.env.PET_ID_SERVER_ENDPOINT || 'http://raza.kemo.labs:8910/app';
+const PetIDServerEndpoint = process.env.PET_ID_SERVER_ENDPOINT || 'https://pet-id-backend-a-sso-app-demo.apps.core-ocp.kemo.labs/app/';
 const TotalConfig = {'keycloakServer': KeycloakServer, 'keycloakRealm': KeycloakRealm, 'keycloakClientID': KeycloakClientID, 'petIDServerEndpoint': PetIDServerEndpoint}
 
 Vue.use(VueLogger);

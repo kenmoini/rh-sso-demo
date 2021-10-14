@@ -18,5 +18,5 @@ spec:
       targetPort: 8080
   selector:
     app: pet-id-backend
-    component: pet-id-backend
+    component: deployment
   type: ClusterIP

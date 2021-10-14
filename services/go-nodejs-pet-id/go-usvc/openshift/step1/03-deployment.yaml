@@ -7,15 +7,20 @@ metadata:
     app.kubernetes.io/name: pet-id-backend
     app.kubernetes.io/part-of: pet-id
     component: deployment
+  annotations:
+    app.openshift.io/connects-to: >-
+      [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"petid-db"}]
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: pet-id-backend
+      component: deployment
   template:
     metadata:
       labels:
         app: pet-id-backend
+        component: deployment
     spec:
       containers:
       - name: pet-id-backend
