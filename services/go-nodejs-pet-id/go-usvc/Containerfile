@@ -26,4 +26,4 @@ RUN mkdir -p /opt/app-root \
 
 USER 65532:65532
 
-ENTRYPOINT ["/pet-id -config /opt/app-root/config.yml"]
+CMD /pet-id -config /opt/app-root/config.yml
