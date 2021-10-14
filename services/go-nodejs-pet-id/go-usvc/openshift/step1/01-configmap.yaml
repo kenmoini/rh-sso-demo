@@ -4,7 +4,7 @@ metadata:
   name: pet-id-backend-config-yml
   labels:
     app: pet-id-backend
-    app.kubernetes.io/name: pet-id-backend-env
+    app.kubernetes.io/name: pet-id-backend-config-yml
     app.kubernetes.io/part-of: pet-id
     component: configmap
 data:

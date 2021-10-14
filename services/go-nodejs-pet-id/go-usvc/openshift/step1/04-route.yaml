@@ -1,0 +1,21 @@
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: pet-id-backend
+  labels:
+    app: pet-id-backend
+    app.kubernetes.io/name: pet-id-backend
+    app.kubernetes.io/part-of: pet-id
+    component: pet-id-backend-route
+spec:
+  to:
+    kind: Service
+    name: pet-id-backend
+    weight: 100
+  port:
+    targetPort: pet-id-backend
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

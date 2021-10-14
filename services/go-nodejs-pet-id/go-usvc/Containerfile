@@ -18,6 +18,12 @@ WORKDIR /
 
 COPY --from=builder /workspace/dist/pet-id .
 
+USER root
+
+RUN mkdir -p /opt/app-root \
+ && chmod -R 777 /opt/app-root
+ && chown -R 65532:65532 /opt/app-root
+
 USER 65532:65532
 
-ENTRYPOINT ["/pet-id -config /opt/config.yml"]
+ENTRYPOINT ["/pet-id -config /opt/app-root/config.yml"]

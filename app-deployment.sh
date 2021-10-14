@@ -24,7 +24,7 @@ until [ $(oc get jobs -n ${NS_APPS} --selector='component==petid-dbpopulate-job'
 
 ## Frontend
 logHeader "Deploying PetID - Frontend..."
-oc apply -n ${NS_APPS} -f services/go-nodejs-pet-id/app-view/openshift/
+oc apply -n ${NS_APPS} -f services/go-nodejs-pet-id/app-vue/openshift/
 
 ######## Deploy Furever Safe
 

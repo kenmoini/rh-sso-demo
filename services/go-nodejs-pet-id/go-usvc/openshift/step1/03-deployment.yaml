@@ -34,11 +34,11 @@ spec:
           - name: THREE_SCALE_SECRET_HEADER
             value: someSecretHeaderKeyValue
         volumeMounts:
-          - name: config-yml
-            mountPath: "/opt"
+          - name: config
+            mountPath: "/opt/app-root/"
             readOnly: true
       volumes:
-        - name: config-yml
+        - name: config
           configMap:
             name: pet-id-backend-config-yml
             items:
