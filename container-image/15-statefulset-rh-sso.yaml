@@ -1,0 +1,147 @@
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: rh-sso
+  labels:
+    app: rh-sso
+    app.kubernetes.io/part-of: rh-sso
+    component: rh-sso
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rh-sso
+      component: rh-sso
+  template:
+    metadata:
+      name: rh-sso
+      creationTimestamp: null
+      labels:
+        app: rh-sso
+        component: rh-sso
+    spec:
+      restartPolicy: Always
+      initContainers:
+        - name: extensions-init
+          image: >-
+            registry.redhat.io/rh-sso-7-tech-preview/sso74-init-container-rhel8:7.4
+          env:
+            - name: KEYCLOAK_EXTENSIONS
+          resources: {}
+          volumeMounts:
+            - name: rh-sso-extensions
+              mountPath: /opt/extensions
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      schedulerName: default-scheduler
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - rh-sso
+                topologyKey: topology.kubernetes.io/zone
+            - weight: 90
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - rh-sso
+                topologyKey: kubernetes.io/hostname
+      terminationGracePeriodSeconds: 30
+      securityContext: {}
+      containers:
+        - terminationMessagePath: /dev/termination-log
+          name: rh-sso
+          env:
+            - name: DB_SERVICE_PREFIX_MAPPING
+              value: rh-sso-postgresql=DB
+            - name: TX_DATABASE_PREFIX_MAPPING
+              value: rh-sso-postgresql=DB
+            - name: DB_JNDI
+              value: 'java:jboss/datasources/KeycloakDS'
+            - name: DB_SCHEMA
+              value: public
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: rh-sso-db-secret
+                  key: POSTGRES_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rh-sso-db-secret
+                  key: POSTGRES_PASSWORD
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: rh-sso-db-secret
+                  key: POSTGRES_DATABASE
+            - name: JGROUPS_PING_PROTOCOL
+              value: dns.DNS_PING
+            - name: OPENSHIFT_DNS_PING_SERVICE_NAME
+              value: rh-sso-discovery.rh-sso-demo.svc.cluster.local
+            - name: CACHE_OWNERS_COUNT
+              value: '2'
+            - name: CACHE_OWNERS_AUTH_SESSIONS_COUNT
+              value: '2'
+            - name: SSO_ADMIN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: credential-rh-sso
+                  key: ADMIN_USERNAME
+            - name: SSO_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: credential-rh-sso
+                  key: ADMIN_PASSWORD
+            - name: X509_CA_BUNDLE
+              value: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            - name: STATISTICS_ENABLED
+              value: 'TRUE'
+          ports:
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 9990
+              protocol: TCP
+            - containerPort: 8778
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: rh-sso-x509-https-secret
+              mountPath: /etc/x509/https
+            - name: rh-sso-extensions
+              mountPath: /opt/eap/standalone/deployments
+            - name: rh-sso-probes
+              mountPath: /probes
+          terminationMessagePolicy: File
+          image: 'quay.io/kenmoini/custom-keycloak-mypurrina:latest'
+      volumes:
+        - name: rh-sso-x509-https-secret
+          secret:
+            secretName: rh-sso-x509-https-secret
+            defaultMode: 420
+            optional: true
+        - name: rh-sso-extensions
+          emptyDir: {}
+        - name: rh-sso-probes
+          configMap:
+            name: rh-sso-probes
+            defaultMode: 365
+      dnsPolicy: ClusterFirst
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      partition: 0
+  revisionHistoryLimit: 10
