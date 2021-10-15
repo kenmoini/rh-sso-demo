@@ -1,4 +1,6 @@
-FROM registry.redhat.io/rh-sso-7-tech-preview/sso74-init-container-rhel8:7.4
+FROM registry.redhat.io/rh-sso-7/sso74-openshift-rhel8:7.4
 
-# Add theme
-COPY themes/myfurbaby/ /opt/eap/themes/myfurbaby/
+# Add themes
+COPY --chown=185:root themes/mypurrina/ /opt/eap/themes/mypurrina/
+
+RUN chmod -R 775 /opt/eap/themes/mypurrina
