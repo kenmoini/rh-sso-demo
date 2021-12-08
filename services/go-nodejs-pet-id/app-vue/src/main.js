@@ -3,14 +3,13 @@ import App from './App.vue'
 import VueLogger from 'vuejs-logger';
 import * as Keycloak from 'keycloak-js';
 import axios from 'axios';
+import appVars from './vars.js';
 
 // Constant definitions
-//const KeycloakServerOLD = process.env.KEYCLOAK_SERVER || 'https://rh-sso.apps.core-ocp.kemo.labs/auth/';
-const KeycloakServer = process.env.KEYCLOAK_SERVER;
-//const PetIDServerEndpointOLD = process.env.PET_ID_SERVER_ENDPOINT || 'https://pet-id-backend.apps.core-ocp.kemo.labs/app';
-const PetIDServerEndpoint = process.env.PET_ID_SERVER_ENDPOINT;
-const KeycloakRealm = process.env.KEYCLOAK_REALM || 'petcorp';
-const KeycloakClientID = process.env.KEYCLOAK_CLIENT_ID || 'pet-id';
+const KeycloakServer = appVars.KeycloakServer;
+const PetIDServerEndpoint = appVars.PetIDServerEndpoint;
+const KeycloakRealm = appVars.KeycloakRealm;
+const KeycloakClientID = appVars.KeycloakClientID;
 const TotalConfig = {'keycloakServer': KeycloakServer, 'keycloakRealm': KeycloakRealm, 'keycloakClientID': KeycloakClientID, 'petIDServerEndpoint': PetIDServerEndpoint}
 
 Vue.use(VueLogger);

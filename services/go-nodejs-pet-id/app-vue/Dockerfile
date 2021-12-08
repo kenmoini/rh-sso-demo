@@ -1,11 +1,14 @@
 FROM quay.io/polyglotsystems/ubi8-nginx:latest
 
 ENV APP_NAME go-nodejs-pet-id
+ENV APP_VERSION 2
 
 USER root
 
 #WORKDIR "/opt/app-root/src"
 WORKDIR "/var/www/html"
+
+COPY container-root/ /
 
 COPY . /var/www/html
 
