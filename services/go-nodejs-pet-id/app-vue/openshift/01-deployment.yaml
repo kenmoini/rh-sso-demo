@@ -35,10 +35,10 @@ spec:
           protocol: TCP
         env:
           - name: KEYCLOAK_SERVER
-            value: https://rh-sso-a-rh-sso-demo.apps.core-ocp.kemo.labs/auth/
+            value: https://rh-sso-a-rh-sso-demo.apps.core-ocp.kemo.network/auth/
           - name: KEYCLOAK_REALM
             value: petcorp
           - name: KEYCLOAK_CLIENT_ID
             value: separate-client
           - name: PET_ID_SERVER_ENDPOINT
-            value: https://pet-id-backend-a-sso-app-demo.apps.core-ocp.kemo.labs/app
+            value: https://pet-id-backend-a-sso-app-demo.apps.core-ocp.kemo.network/app
