@@ -1,4 +1,4 @@
-FROM quay.io/polyglotsystems/ubi8-nginx:latest as builder
+FROM quay.io/polyglotsystems/ubi8-nginx:latest
 
 USER root
 
