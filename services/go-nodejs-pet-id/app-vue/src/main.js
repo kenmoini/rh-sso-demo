@@ -5,10 +5,12 @@ import * as Keycloak from 'keycloak-js';
 import axios from 'axios';
 
 // Constant definitions
-const KeycloakServer = process.env.KEYCLOAK_SERVER || 'https://rh-sso-a-rh-sso-demo.apps.core-ocp.kemo.labs/auth/';
+//const KeycloakServer = process.env.KEYCLOAK_SERVER || 'https://rh-sso-a-rh-sso-demo.apps.core-ocp.kemo.labs/auth/';
+const KeycloakServer = process.env.KEYCLOAK_SERVER;
+//const PetIDServerEndpoint = process.env.PET_ID_SERVER_ENDPOINT || 'https://pet-id-backend-a-sso-app-demo.apps.core-ocp.kemo.labs/app';
+const PetIDServerEndpoint = process.env.PET_ID_SERVER_ENDPOINT;
 const KeycloakRealm = process.env.KEYCLOAK_REALM || 'petcorp';
-const KeycloakClientID = process.env.KEYCLOAK_CLIENT_ID || 'separate-client';
-const PetIDServerEndpoint = process.env.PET_ID_SERVER_ENDPOINT || 'https://pet-id-backend-a-sso-app-demo.apps.core-ocp.kemo.labs/app';
+const KeycloakClientID = process.env.KEYCLOAK_CLIENT_ID || 'pet-id';
 const TotalConfig = {'keycloakServer': KeycloakServer, 'keycloakRealm': KeycloakRealm, 'keycloakClientID': KeycloakClientID, 'petIDServerEndpoint': PetIDServerEndpoint}
 
 Vue.use(VueLogger);
@@ -46,8 +48,6 @@ keycloak.init({ onLoad: initOptions.onLoad }).then((auth) => {
     Vue.$log.info("Authenticated");
 
     // Query the PetID Profile Server
-    console.log("Sub: " + keycloak.subject)
-
     
     getProfileByUUID(keycloak.subject).then(function (response) {
       let profile = response;
@@ -61,17 +61,6 @@ keycloak.init({ onLoad: initOptions.onLoad }).then((auth) => {
     }).catch(function (response) {
         console.log(response);
     });
-    /*
-    profile = getProfileByUUID(keycloak.subject).then(data => {
-      return console.log(data)
-    });
-    console.log(profile);
-    */
-
-    //new Vue({
-    //  el: '#app',
-    //  render: h => h(App, { props: { keycloak: keycloak, profile: profile, appConfig: TotalConfig } })
-    //})
   }
 
 
