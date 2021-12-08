@@ -14,7 +14,7 @@ spec:
     name: pet-id-frontend
     weight: 100
   port:
-    targetPort: pet-id-frontend
+    targetPort: 8080
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Redirect

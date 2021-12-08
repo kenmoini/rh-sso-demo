@@ -4,6 +4,7 @@ metadata:
   name: pet-id-frontend
   labels:
     app: pet-id-frontend
+    deployment: pet-id-frontend
     app.kubernetes.io/name: pet-id-frontend
     app.kubernetes.io/part-of: pet-id
     component: pet-id-frontend-deployment
@@ -15,11 +16,13 @@ spec:
   selector:
     matchLabels:
       app: pet-id-frontend
+      deployment: pet-id-frontend
       component: pet-id-frontend-deployment
   template:
     metadata:
       labels:
-        app: pet-id-frontend  
+        app: pet-id-frontend
+        deployment: pet-id-frontend
         component: pet-id-frontend-deployment
     spec:
       containers:
