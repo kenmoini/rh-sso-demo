@@ -1,5 +1,7 @@
 FROM quay.io/polyglotsystems/ubi8-nginx:latest
 
+ENV APP_NAME go-nodejs-pet-id
+
 USER root
 
 #WORKDIR "/opt/app-root/src"
