@@ -14,6 +14,8 @@ RUN npm install \
 
 USER 1001
 
+EXPOSE 8080
+
 #FROM registry.access.redhat.com/ubi8/httpd-24:latest
 #
 #COPY --from=builder /opt/app-root/src/dist/ /var/www/html/dist/
