@@ -1,9 +1,9 @@
 FROM quay.io/polyglotsystems/ubi8-nginx:latest as builder
 
-ENV KEYCLOAK_SERVER
-ENV KEYCLOAK_REALM
-ENV KEYCLOAK_CLIENT_ID
-ENV PET_ID_SERVER_ENDPOINT
+ENV KEYCLOAK_SERVER "https://rh-sso-a-rh-sso-demo.apps.core-ocp.kemo.labs/auth/"
+ENV KEYCLOAK_REALM "petcorp"
+ENV KEYCLOAK_CLIENT_ID "pet-id"
+ENV PET_ID_SERVER_ENDPOINT "https://pet-id-backend-a-sso-app-demo.apps.core-ocp.kemo.labs/app"
 
 USER root
 
