@@ -1,2 +1,2 @@
-requests==2.24.*
+requests==2.27.*
 kafka-python
