@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.23.0",
-    "keycloak-js": "^11.0.1",
+    "keycloak-js": "^18.0.1",
     "vue": "^2.5.11",
     "vue-logger": "0.0.4",
     "vuejs-logger": "^1.5.4"
